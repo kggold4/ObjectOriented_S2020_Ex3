@@ -40,6 +40,7 @@ class DiGraph(GraphInterface):
             return False
         else:
             self.nodes[node_id] = NodeData(node_id, pos)
+            self.mc += 1
             return True
 
     def remove_node(self, node_id: int) -> bool:
