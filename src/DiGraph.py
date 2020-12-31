@@ -7,7 +7,7 @@ class DiGraph(GraphInterface):
     """
     def __init__(self):
         self.nodes = {}
-        self.edges = {}
+        self.edges = 0
         self.mc = 0
 
     """
@@ -20,7 +20,7 @@ class DiGraph(GraphInterface):
     :return the size of edges in the graph
     """
     def e_size(self) -> int:
-        return len(self.edges)
+        return self.edges
 
     """
     :return a dictionary of graph nodes
@@ -78,11 +78,13 @@ class DiGraph(GraphInterface):
             # if weight is not the same
             else:
                 node1.childes[id2] = weight
+                return True
 
         # if node1 and node2 is not connected
         else:
             node1.add_child(id2, weight)
             node2.add_parent(id1, weight)
+            self.edges += 1
             return True
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
@@ -100,15 +102,16 @@ class DiGraph(GraphInterface):
             current_node = self.nodes[node_id]
             for node in self.nodes.values():
                 if node.is_connected(node_id):
-                    node.remove_edge(node_id)
+                    node.remove_edge(node.key, node_id)
                 if current_node.is_connected(node.key):
-                    self.remove_edge(node.key)
+                    self.remove_edge(node_id, node.key)
             self.nodes.pop(node_id)
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
         if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys() or len(self.nodes) <= 1:
             return False
         else:
+            self.edges -= 1
             return self.nodes[node_id1].del_child(node_id2)
 
 
