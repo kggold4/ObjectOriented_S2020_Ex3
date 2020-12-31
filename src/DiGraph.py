@@ -6,8 +6,8 @@ class DiGraph(GraphInterface):
     def __init__(self):
         print("graph created")
         # nodes dict = {key: node_data}
-        self.nodes = dict
-        self.edges = dict
+        self.nodes = {}
+        self.edges = {}
         self.mc = 0
 
     # return size of nodes
@@ -36,11 +36,13 @@ class DiGraph(GraphInterface):
         print("add_edge")
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
-        if node_id in self.nodes:
+        if node_id in self.nodes.keys():
+            print('node {} cannot add'.format(node_id))
             return False
         else:
             self.nodes[node_id] = NodeData(node_id, pos)
             self.mc += 1
+            print('node {} add'.format(node_id))
             return True
 
     def remove_node(self, node_id: int) -> bool:
@@ -50,48 +52,56 @@ class DiGraph(GraphInterface):
         print("remove edge")
 
 
+class NodeData(object):
+    pass
+
+
 class NodeData:
-    def __init__(self, key: int, position: tuple = None, weight: float = 0, tag: int = 0, info: str = ""):
+    def __init__(self, key: int = None, position: tuple = None, weight: float = 0, tag: int = 0, info: str = ""):
         self.key = key
         self.position = position
         self.weight = weight
         self.tag = tag
         self.info = info
+        self.parents = {}
+        self.childes = {}
 
     def __repr__(self):
-        return '' + self.key
+        return str(self.key)
 
-    def get_key(self) -> int:
-        return self.key
+    def add_parent(self, node: NodeData):
+        if node.key in self.parents.keys():
+            return False
+        else:
+            self.parents[node.key] = node
+            return True
 
-    def get_position(self) -> tuple:
-        return self.position
+    def get_parent(self, key: int) -> NodeData:
+        return self.parents[key]
 
-    def get_weight(self) -> float:
-        return self.weight
+    def add_child(self, node: NodeData):
+        if node.key in self.childes.keys():
+            return False
+        else:
+            self.childes[node.key] = node
+            return True
 
-    def get_tag(self) -> int:
-        return self.tag
-
-    def get_info(self) -> str:
-        return self.info
-
-    def set_position(self, position: tuple):
-        self.position = position
-
-    def set_weight(self, weight: float):
-        self.weight = weight
-
-    def set_tag(self, tag: int):
-        self.tag = tag
-
-    def set_info(self, info: str):
-        self.info = info
+    def get_child(self, key: int) -> NodeData:
+        return self.childes[key]
 
 
 if __name__ == '__main__':
-    t = {"a": 2, "b": 3, "c": 6}
-    # list
-    x = [1, 2, 3]
-    y = (1, 2, 3)
-    print(len(t))
+    n0 = NodeData(0)
+    n1 = NodeData(1)
+    n0.add_child(n1)
+    n0.add_parent(n1)
+    n1.add_child(n0)
+    n1.add_parent(n0)
+    x = n0.get_parent(1)
+    print(x)
+    print(n1 == x)
+    # g = DiGraph()
+    # g.add_node(1)
+    # g.add_node(2)
+    # g.add_node(2)
+    # g.add_node(3)
