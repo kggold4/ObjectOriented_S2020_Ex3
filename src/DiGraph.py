@@ -6,8 +6,10 @@ class DiGraph(GraphInterface):
     default constructor
     """
     def __init__(self):
-        self.nodes = {}
-        self.edges = 0
+        self.nodes = {int: NodeData}
+        self.childes = {}
+        self.parents = {}
+        self.ec = 0
         self.mc = 0
 
     """
@@ -20,7 +22,7 @@ class DiGraph(GraphInterface):
     :return the size of edges in the graph
     """
     def e_size(self) -> int:
-        return self.edges
+        return self.ec
 
     """
     :return a dictionary of graph nodes
@@ -34,7 +36,7 @@ class DiGraph(GraphInterface):
     """
     def all_in_edges_of_node(self, id1: int) -> dict:
         if id1 in self.nodes:
-            return self.nodes[id1].get_parents
+            return self.parents[id1]
 
     """
     :return a dictionary of all the nodes connected from id1 node
@@ -42,7 +44,7 @@ class DiGraph(GraphInterface):
     """
     def all_out_edges_of_node(self, id1: int) -> dict:
         if id1 in self.nodes:
-            return self.nodes[id1].get_childes
+            return self.childes[id1]
 
     """
     :return mode count
@@ -66,7 +68,6 @@ class DiGraph(GraphInterface):
 
         # getting NodeData objects of id1 and id2
         node1 = self.nodes.get(id1)
-        node2 = self.nodes.get(id2)
 
         # if node1 and node2 is connected
         if node1.is_connected(id2):
@@ -78,19 +79,25 @@ class DiGraph(GraphInterface):
             # if weight is not the same
             else:
                 node1.childes[id2] = weight
+                self.childes[id1][id2] = weight
+                self.parents[id2][id1] = weight
+                self.mc += 1
                 return True
 
         # if node1 and node2 is not connected
         else:
-            node1.add_child(id2, weight)
-            node2.add_parent(id1, weight)
-            self.edges += 1
+            self.childes[id1][id2] = weight
+            self.parents[id2][id1] = weight
+            self.ec += 1
+            self.mc += 1
             return True
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id in self.nodes.keys():
             return False
         else:
+            self.childes[node_id] = {}
+            self.parents[node_id] = {}
             self.nodes[node_id] = NodeData(node_id, pos)
             self.mc += 1
             return True
@@ -111,8 +118,10 @@ class DiGraph(GraphInterface):
         if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys() or len(self.nodes) <= 1:
             return False
         else:
-            self.edges -= 1
-            return self.nodes[node_id1].del_child(node_id2)
+            self.ec -= 1
+            self.mc += 1
+            self.childes[node_id1] = None
+            return True
 
 
 class NodeData:
@@ -173,7 +182,7 @@ if __name__ == '__main__':
     g = DiGraph()
     g.add_node(1)
     g.add_node(2)
-    g.add_node(2)
     g.add_node(3)
-    g.add_edge(1, 2, 5.2)
-    print()
+    g.add_edge(1, 2, 5)
+    print(g.all_in_edges_of_node(1))
+    print(g.all_out_edges_of_node(1))

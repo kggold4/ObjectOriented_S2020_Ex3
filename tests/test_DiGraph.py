@@ -1,7 +1,7 @@
 from unittest import TestCase
 from src import DiGraph
 
-size = 1000
+size = 10000
 
 
 def create_graph(n: int = size) -> DiGraph:
@@ -37,6 +37,13 @@ class TestDiGraph(TestCase):
         assert 0 == graph.e_size()
 
     def test_get_all_v(self):
+        graph = create_graph(size)
+        all_v = graph.get_all_v()
+        assert size == len(all_v)
+        assert isinstance(all_v, dict)
+        for i in range(size):
+            assert i in all_v.keys()
+
     # def test_all_in_edges_of_node(self):
     # def test_all_out_edges_of_node(self):
     # def test_get_mc(self):
