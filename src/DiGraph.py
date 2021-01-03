@@ -6,11 +6,14 @@ class DiGraph(GraphInterface):
     default constructor
     """
     def __init__(self):
-        self.nodes = {int: NodeData}
+        self.nodes = {}
         self.childes = {}
         self.parents = {}
         self.ec = 0
         self.mc = 0
+
+    def __repr__(self):
+        return str(self.nodes.values()) + str(self.childes)
 
     """
     :return the size of nodes in the graph
@@ -31,16 +34,16 @@ class DiGraph(GraphInterface):
         return self.nodes
 
     """
+    :param id1 node key
     :return a dictionary of all the nodes connected to id1 node
-    :param id1 node
     """
     def all_in_edges_of_node(self, id1: int) -> dict:
         if id1 in self.nodes:
             return self.parents[id1]
 
     """
+    :param id1 node key
     :return a dictionary of all the nodes connected from id1 node
-    :param id1 node
     """
     def all_out_edges_of_node(self, id1: int) -> dict:
         if id1 in self.nodes:
@@ -91,6 +94,12 @@ class DiGraph(GraphInterface):
             self.mc += 1
             return True
 
+    """
+    adding node to the graph
+    :param node_id the key of the node
+    :param pos node position
+    :return true if succeed by adding the node
+    """
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id in self.nodes.keys():
             return False
@@ -101,6 +110,10 @@ class DiGraph(GraphInterface):
             self.mc += 1
             return True
 
+    """
+    :param node_id
+    :return true if succeed by removing the node
+    """
     def remove_node(self, node_id: int) -> bool:
 
         # if node_id cannot be found in the graph
@@ -118,7 +131,7 @@ class DiGraph(GraphInterface):
 
             # remove any connection with node_id and his parents
             node_parents = self.parents[node_id].keys()
-            for i in node_parents:
+            for i in list(node_parents):
                 self.remove_edge(i, node_id)
 
             # remove from parents node_id
@@ -128,6 +141,11 @@ class DiGraph(GraphInterface):
             self.nodes.pop(node_id)
             self.mc += 1
 
+    """
+    :param node_id1 node key
+    :param node_id2 node key
+    :return true 
+    """
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
 
         # if node_id1 or node_id2 cannot be found in the graph
