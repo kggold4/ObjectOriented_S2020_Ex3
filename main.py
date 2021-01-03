@@ -1,16 +1,11 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from src.DiGraph import DiGraph
+from src.GraphInterface import GraphInterface
+from src.GraphCreator import GraphCreator
+from src.GraphAlgoInterface import GraphAlgoInterface
+from src.GraphAlgo import GraphAlgo
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    graph = GraphCreator.create_graph(10, 5, 1)
+    graphAlgo = GraphAlgo(graph)
+    graphAlgo.save_to_json("hallo.txt")
