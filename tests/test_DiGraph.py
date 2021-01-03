@@ -1,13 +1,24 @@
 from unittest import TestCase
 from src import DiGraph
+import random
 
-size = 10000
+size = 25
 
 
-def create_graph(n: int = size) -> DiGraph:
+def create_graph(n: int = size, seed_num: int = 0) -> DiGraph:
+    random.seed(seed_num)
+    pos = []
+
+    for i in range(n*2):
+        pos.append(random.random() * 10)
+
     graph = DiGraph.DiGraph()
+
     for i in range(n - 1):
-        graph.add_node(i)
+        if i % 2 == 0:
+            p = (pos[i], pos[i + 1])
+        graph.add_node(i, p)
+
     return graph
 
 
@@ -35,9 +46,10 @@ class TestDiGraph(TestCase):
         for i in range(size - 1):
             if i != 0:
                 graph.add_edge(0, i, 10)
-        assert size - 1 == graph.e_size()
+        assert size - 2 == graph.e_size()
 
-        for i in range(size):
+        temp_size = size
+        for i in range(temp_size):
             graph.remove_node(i)
         assert 0 == graph.e_size()
 
@@ -46,7 +58,7 @@ class TestDiGraph(TestCase):
         all_v = graph.get_all_v()
         assert size == len(all_v)
         assert isinstance(all_v, dict)
-        for i in range(size):
+        for i in range(size - 1):
             assert i in all_v.keys()
 
     # def test_all_in_edges_of_node(self):

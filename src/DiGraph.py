@@ -107,10 +107,9 @@ class DiGraph(GraphInterface):
         if node_id not in self.nodes.keys():
             return False
         else:
-
             # remove any connection with node_id and his childes
             node_childes = self.childes[node_id].keys()
-            for i in node_childes:
+            for i in list(node_childes):
                 self.remove_edge(node_id, i)
                 # self.parents[i].pop(node_id)
 
