@@ -63,22 +63,21 @@ class DiGraph(GraphInterface):
 
         # cannot be connected
         # id1 or id2 cannot be found int the graph
-        if id1 not in self.nodes.keys() or id2 not in self.nodes.keys() or len(self.nodes) <= 1:
+        if id1 not in self.nodes.keys() or id2 not in self.nodes.keys() or len(self.nodes) <= 1 or id1 == id2:
             return False
 
-        # getting NodeData objects of id1 and id2
+        # getting NodeData objects of id1
         node1 = self.nodes.get(id1)
 
         # if node1 and node2 is connected
         if node1.is_connected(id2):
 
             # if weight is the same
-            if node1.childes[id2] == weight:
+            if self.childes[id1][id2] == weight:
                 return False
 
             # if weight is not the same
             else:
-                node1.childes[id2] = weight
                 self.childes[id1][id2] = weight
                 self.parents[id2][id1] = weight
                 self.mc += 1
@@ -103,28 +102,50 @@ class DiGraph(GraphInterface):
             return True
 
     def remove_node(self, node_id: int) -> bool:
+
+        # if node_id cannot be found in the graph
         if node_id not in self.nodes.keys():
             return False
         else:
-            current_node = self.nodes[node_id]
-            for node in self.nodes.values():
-                if node.is_connected(node_id):
-                    node.remove_edge(node.key, node_id)
-                if current_node.is_connected(node.key):
-                    self.remove_edge(node_id, node.key)
+
+            # remove any connection with node_id and his childes
+            node_childes = self.childes[node_id].keys()
+            for i in node_childes:
+                self.remove_edge(node_id, i)
+                # self.parents[i].pop(node_id)
+
+            # remove from childes node_id
+            self.childes.pop(node_id)
+
+            # remove any connection with node_id and his parents
+            node_parents = self.parents[node_id].keys()
+            for i in node_parents:
+                self.remove_edge(i, node_id)
+
+            # remove from parents node_id
+            self.parents.pop(node_id)
+
+            # remove node id from nodes dictionary
             self.nodes.pop(node_id)
+            self.mc += 1
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
-        if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys() or len(self.nodes) <= 1:
+
+        # if node_id1 or node_id2 cannot be found in the graph
+        if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys()\
+                or len(self.nodes) <= 1 or node_id1 == node_id2:
             return False
         else:
+            self.childes[node_id1].pop(node_id2)
+            self.parents[node_id2].pop(node_id1)
             self.ec -= 1
             self.mc += 1
-            self.childes[node_id1] = None
             return True
 
 
 class NodeData:
+    key = None
+
     def __init__(self, key: int = None, position: tuple = None, weight: float = 0, tag: int = 0, info: str = ""):
         self.key = key
         self.position = position

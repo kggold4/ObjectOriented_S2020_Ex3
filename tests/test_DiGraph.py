@@ -6,7 +6,7 @@ size = 10000
 
 def create_graph(n: int = size) -> DiGraph:
     graph = DiGraph.DiGraph()
-    for i in range(n):
+    for i in range(n - 1):
         graph.add_node(i)
     return graph
 
@@ -20,18 +20,23 @@ class TestDiGraph(TestCase):
     def test_e_size(self):
         global size
         graph = create_graph(size)
-        for i in range(size):
+        for i in range(size - 1):
             if i != 0:
                 graph.add_edge(0, i, 10)
-        assert size - 1 == graph.e_size()
-        for i in range(size):
+
+        # size - 2 = graph.e_size
+        # because not included node 0 and node with 'size' id (aka node 10000)
+        assert size - 2 == graph.e_size()
+        for i in range(size - 1):
             if i != 0:
                 graph.remove_edge(0, i)
         assert 0 == graph.e_size()
-        for i in range(size):
+
+        for i in range(size - 1):
             if i != 0:
                 graph.add_edge(0, i, 10)
         assert size - 1 == graph.e_size()
+
         for i in range(size):
             graph.remove_node(i)
         assert 0 == graph.e_size()
