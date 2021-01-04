@@ -8,4 +8,4 @@ from src.GraphAlgo import GraphAlgo
 if __name__ == '__main__':
     graph = GraphCreator.create_graph(10, 5, 1)
     graphAlgo = GraphAlgo(graph)
-    graphAlgo.save_to_json("hallo.txt")
+    graphAlgo.save_to_json("hallo.json")
