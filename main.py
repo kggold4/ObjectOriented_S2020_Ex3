@@ -6,6 +6,16 @@ from src.GraphAlgo import GraphAlgo
 
 
 if __name__ == '__main__':
-    graph = GraphCreator.create_graph(10, 5, 1)
+    graph = GraphCreator.create_graph(10, 10, 1)
     graphAlgo = GraphAlgo(graph)
-    graphAlgo.save_to_json("hallo.json")
+    print('save graph:', graphAlgo.get_graph())
+    print(graphAlgo.graph.e_size())
+    graphAlgo.save_to_json("graph.json")
+
+    graph2 = DiGraph()
+    graphAlgo2 = GraphAlgo(graph2)
+    graphAlgo2.load_from_json("graph.json")
+    print('load graph:', graphAlgo2.get_graph())
+    print(graphAlgo2.graph.e_size())
+
+    graphAlgo2.plot_graph()

@@ -1,3 +1,5 @@
+import numpy as np
+
 from src.GraphInterface import GraphInterface
 
 
@@ -73,7 +75,7 @@ class DiGraph(GraphInterface):
         node1 = self.nodes.get(id1)
 
         # if node1 and node2 is connected
-        if node1.is_connected(id2):
+        if id2 in self.childes.get(id1):
 
             # if weight is the same
             if self.childes[id1][id2] == weight:
@@ -169,51 +171,19 @@ class NodeData:
         self.weight = weight
         self.tag = tag
         self.info = info
-        self.parents = {}
-        self.childes = {}
 
     def __repr__(self):
         return str(self.key)
 
-    def add_parent(self, key: int, weight: float):
-        if key in self.parents.keys():
-            return False
+    def get_pos(self) -> tuple:
+        return self.position
+
+    def distance(self, node) -> float:
+        if self.position is None or node.position is None:
+            return -1
         else:
-            self.parents[key] = weight
-            return True
-
-    def del_parent(self, key: int) -> bool:
-        if key in self.parents.keys():
-            self.parents.pop(key)
-            return True
-        else:
-            return False
-
-    def get_parents(self) -> dict:
-        return self.parents
-
-    def add_child(self, key: int, weight: float):
-        if key in self.childes.keys():
-            return False
-        else:
-            self.childes[key] = weight
-            return True
-
-    def del_child(self, key: int) -> bool:
-        if key in self.childes.keys():
-            self.childes.pop(key)
-            return True
-        else:
-            return False
-
-    def get_childes(self) -> dict:
-        return self.childes
-
-    def is_connected(self, key: int) -> bool:
-        if key in self.childes.keys():
-            return True
-        else:
-            return False
+            return np.sqrt((np.power(self.position[0] - node.position[0], 2)) +
+                           (np.power(self.position[1] - node.position[1], 2)))
 
 
 if __name__ == '__main__':
