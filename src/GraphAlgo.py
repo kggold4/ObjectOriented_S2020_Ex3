@@ -65,8 +65,95 @@ class GraphAlgo(GraphAlgoInterface):
             print(e)
             return False
 
-    # def shortest_path(self, id1: int, id2: int) -> (float, list):
-    #     sheker_kolshehoo = queue.PriorityQueue()
+    def shortest_path(self, id1: int, id2: int) -> (float, list):
+
+        # if graph is empty from nodes
+        if self.graph.v_size() == 0:
+            return None
+
+        # getting all graph nodes dictionary
+        nodes = self.graph.get_all_v()
+
+        # check if one of the nodes cannot be found in the graph
+        if id1 not in nodes.keys() or id2 not in nodes.keys():
+            return None
+
+        # getting start and end nodes
+        start = nodes[id1]
+        end = nodes[id2]
+
+        # if id1 and id2 is the same node
+        if id1 == id2:
+            return 0, id1
+
+        # if the nodes in the graph and not the same node but the graph does not have any edges
+        if self.graph.e_size() == 0:
+            return None
+
+        # set all weights of all nodes to infinity
+        for node in nodes.values():
+            node.weight = float('inf')
+
+        # set all tags of all nodes to 0
+        for node in nodes.values():
+            node.tag = 0
+
+        # using priority queue for the shortest path algorithm
+        pq = queue.PriorityQueue()
+
+        # previous dictionary will contains for each node id the previous node id in the shortest path
+        previous = {}
+
+        # insert the first node id in nodes dictionary to the priority queue
+        start.weight = 0.0
+        pq.put(start.key)
+
+        # dijkstra's algorithm
+        while not pq.empty():
+
+            # poll the shortest priority node, set as visited
+            node: NodeData = nodes[pq.get()]
+
+            # calculate the shortest weight between node to start node
+            childes = self.graph.all_out_edges_of_node(node.key)
+            if len(childes) != 0:
+                for child in childes:
+                    dist = node.weight + childes[child]
+                    if float(dist) < float(nodes[child].weight):
+
+                        # setting new shortest weight, add to queue and set previous
+                        nodes[child].weight = dist
+                        pq.put(child)
+                        previous[child] = node
+
+        # path list from id1 node to id2 node
+        path = []
+
+        # going from end to start nodes for build the path
+        k = end
+        path.append(k)
+        while k is not start:
+
+            # if the nodes are in the graph but no valid path between them
+            print('previous:', previous, 'k:', k)
+            if k not in previous:
+                return None
+
+            # go to previous node
+            k = previous[k]
+            path.append(k)
+
+        # reversing the path from [end -> ... -> start] to [start -> ... -> end]
+        path.reverse()
+
+        # count the distance of the nodes weight from start to end nodes
+        distance = 0
+        for node in path:
+            distance += node.weight
+
+        # return the distance and the path
+        return distance, path
+
     # def connected_component(self, id1: int) -> list:
     # def connected_components(self) -> List[list]:
     def plot_graph(self) -> None:

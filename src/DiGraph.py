@@ -1,6 +1,5 @@
-import numpy as np
-
 from src.GraphInterface import GraphInterface
+from src.NodeData import NodeData
 
 
 class DiGraph(GraphInterface):
@@ -160,30 +159,6 @@ class DiGraph(GraphInterface):
             self.ec -= 1
             self.mc += 1
             return True
-
-
-class NodeData:
-    key = None
-
-    def __init__(self, key: int = None, position: tuple = None, weight: float = 0, tag: int = 0, info: str = ""):
-        self.key = key
-        self.position = position
-        self.weight = weight
-        self.tag = tag
-        self.info = info
-
-    def __repr__(self):
-        return str(self.key)
-
-    def get_pos(self) -> tuple:
-        return self.position
-
-    def distance(self, node) -> float:
-        if self.position is None or node.position is None:
-            return -1
-        else:
-            return np.sqrt((np.power(self.position[0] - node.position[0], 2)) +
-                           (np.power(self.position[1] - node.position[1], 2)))
 
 
 if __name__ == '__main__':
