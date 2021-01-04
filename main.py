@@ -6,10 +6,13 @@ from src.GraphAlgo import GraphAlgo
 
 
 if __name__ == '__main__':
-    graph = GraphCreator.create_graph(6, 10, 1)
+    graph = GraphCreator.create_graph(20, 10, 2)
     graphAlgo = GraphAlgo(graph)
     print('graph:', graphAlgo.get_graph())
-    print(graphAlgo.shortest_path(0, 3))
+    # print('path:', graphAlgo.shortest_path(0, 15))
+    main_list = graphAlgo.connected_components()
+    for l in main_list:
+        print('l:', l)
     graphAlgo.plot_graph()
 
     # graphAlgo.save_to_json("graph.json")
