@@ -1,10 +1,18 @@
 from src.GraphAlgoInterface import GraphAlgoInterface
 from src.GraphInterface import GraphInterface
 from src.DiGraph import DiGraph, NodeData
+
+# using nested list in SCC algorithm
 from typing import List
+
+# using matplotlib to plot the graph
 import matplotlib.pyplot as plt
-import numpy as np
-import queue
+
+# using priority queue in shortest path algorithm
+from queue import PriorityQueue
+
+# using simple queue in SCC algorithm
+from queue import SimpleQueue
 import json
 
 
@@ -103,7 +111,7 @@ class GraphAlgo(GraphAlgoInterface):
             node.tag = 0
 
         # using priority queue for the shortest path algorithm
-        pq = queue.PriorityQueue()
+        pq = PriorityQueue()
 
         # previous dictionary will contains for each node id the previous node id in the shortest path
         previous = {}
@@ -151,205 +159,139 @@ class GraphAlgo(GraphAlgoInterface):
         # return the distance between start and end nodes (the weight of the end node) and the path
         return end.weight, path
 
-    # def connected_component(self, id1: int) -> list:
-    #     low = {}
-    #     nodes = self.graph.get_all_v()
-    #     for node in nodes:
-    #         nodes[node].tag = - 1
-    #         low[node] = 0
-    #
-    #     for i in nodes.keys():
-    #         if nodes[i].tag == - 1:
-    #             self.dfs(id1, low)
-    #
-    #     return low
-    #
-    # def dfs(self, i: int  , low: dict):
-    #     print('new i:', i)
-    #     print('low:', low)
-    #     nodes = self.graph.get_all_v()
-    #     count = 0
-    #     stack = [i]
-    #     nodes[i].tag += 1
-    #     low[i] += nodes[i].tag
-    #     for to in self.graph.all_out_edges_of_node(i):
-    #         if nodes[to].tag == -1:
-    #             print('to:', to)
-    #             self.dfs(to, low)
-    #         if to not in stack:
-    #             print('found to on stack:', to)
-    #             low[i] = np.minimum(low[i], low[to])
-    #
-    #     if nodes[i].tag == low[i]:
-    #         while len(stack) != 0:
-    #             node = stack.pop()
-    #             # low[node] = nodes[i].tag
-    #
-    #             if node == i:
-    #                 break
-    #         count += 1
-    #         print(count)
-    # # nodes dictionary of the graph
-    # nodes = self.graph.get_all_v()
-    #
-    # # reset all tags in the graph to 0
-    # for node in nodes:
-    #     node.tag = 0
-    #
-    # # for each node save the previous node
-    # previous = {}
-    #
-    # # using priority queue for the dfs algorithm
-    # pq = queue.PriorityQueue()
-    #
-    # # add id1 to pq
-    # pq.put(id1)
-    #
-    # # set tag of id1 to 1
-    # nodes[id1].tag = 1
-    #
-    # # create a stack for the current connected component and add id1 to the stacks
-    # stack = [id1]
-    #
-    # # using dfs algorithm
-    # while not pq.empty():
-    #     current_node = pq.get()
-    #     for ni in self.graph.all_out_edges_of_node(current_node):
-    #         if ni not in stack:
-    #             pq.put(ni)
-    #             stack.append(ni)
-    #             previous[ni] = current_node
-    #         else:
-    #              nodes[ni].tag = 1
-    #
-    # current_node = id1
-    #
-    # while True:
-    #     for ni in self.graph.all_out_edges_of_node(current_node):
-    #         if ni not in stack:
-    #             stack.append(ni)
-    #             current_node = ni
+    def connected_component(self, id1: int) -> list:
+        if self.graph.get_all_v().get(id1) is None:
+            return []
+            # run bfs on graph with id1 as src we the edges as is
+        self.bfs(id1, False)
+        help_list = []
+        # adds all the edges that are reachable from src to a list
+        for node in self.graph.get_all_v().values():
+            if node.tag != -1:
+                help_list.append(node)
+        # run bfs on graph transpose with id1 as src (read the edges upside down)
+        self.bfs(id1, True)
+        # if they are still reachable after the edges are flipped its means that its SCC
+        help_list = [node for node in help_list if node.tag != -1]  # dealt all of the nodes that are not reachable
+        for node in help_list:
+            node.set_connected_component(id1)  # update their SCC to src
+        return help_list
 
     def connected_components(self) -> List[list]:
-        nodes = self.graph.get_all_v()
-        self.index = 0
-        self.count = 0
-        stack = []
-        indexes = {}
-        low_link = {}
-        on_stack = {}
-        for node in nodes.values():
-            node.tag = 0
+        if self.graph.v_size() == 0:
+            return []
+            # reset all the components
+        for node in self.graph.get_all_v().values():
+            node.set_connected_component(None)
+        my_list = []
+        # for each node check if its SCC is None is yes  runs connected_components(node)
+        # and its SCC  to the list of SCC
+        for node in self.graph.get_all_v().values():
+            if node.connected_component is None:
+                list_help = self.connected_component(node.key)
+                my_list.append(list_help)
+        return my_list
 
-        final_list = []
-        for node in nodes.values():
-            if node.tag == 0:
-                final_list.append(self.strong_connect(node.key, stack, indexes, low_link, on_stack))
-
-        for i in nodes.values():
-            print(i.key, i.tag)
-            print(i.key, indexes[i.key])
-
-        return final_list
-
-    def strong_connect(self, v: int, stack: list, indexes: dict, low_link: dict, on_stack: list):
-        nodes = self.graph.get_all_v()
-
-        indexes[v] = self.index
-        low_link[v] = self.index
-        self.index += 1
-        stack.append(v)
-        on_stack[v] = True
-        for w in self.graph.all_out_edges_of_node(v).keys():
-            if nodes[w].tag == 0:
-                self.strong_connect(w, stack, indexes, low_link, on_stack)
-                low_link[v] = min(low_link[v], low_link[w])
-            elif not on_stack[w]:
-                continue
-            else:
-                low_link[v] = np.minimum(low_link[v], w)
-
-        sc = []
-        if low_link[v] == v:
-            self.count += 1
-            while w is not v:
-                w = stack.pop()
-                nodes[w].tag = self.count
-                on_stack[w] = False
-                sc.append(w)
-
-        return sc
-
-
-        #         // If v is a root node, pop the stack and generate an SCC
-        #     #         if v.lowlink = v.index then
-        #     #             start a new strongly connected component
-        #     #             repeat
-        #     #                 w := S.pop()
-        #     #                 w.onStack := false
-        #     #                 add w to current strongly connected component
-        #     #             while w ≠ v
-        #     #             output the current strongly connected component
-        #     #         end if
-        #     #     end function
-        # algorithm tarjan is
-        #     input: graph G = (V, E)
-        #     output: set of strongly connected components (sets of vertices)
-        #
-        #     index := 0
-        #     S := empty stack
-        #     for each v in V do
-        #         if v.index is undefined then
-        #             strongconnect(v)
-        #         end if
-        #     end for
-        #
-        #     function strongconnect(v)
-        #         // Set the depth index for v to the smallest unused index
-        #         v.index := index
-        #         v.lowlink := index
-        #         index := index + 1
-        #         S.push(v)
-        #         v.onStack := true
-        #
-        #         // Consider successors of v
-        #         for each (v, w) in E do
-        #             if w.index is undefined then
-        #                 // Successor w has not yet been visited; recurse on it
-        #                 strongconnect(w)
-        #                 v.lowlink := min(v.lowlink, w.lowlink)
-        #             else if w.onStack then
-        #                 // Successor w is in stack S and hence in the current SCC
-        #                 // If w is not on stack, then (v, w) is an edge pointing to an SCC already found and must be ignored
-        #                 // Note: The next line may look odd - but is correct.
-        #                 // It says w.index not w.lowlink; that is deliberate and from the original paper
-        #                 v.lowlink := min(v.lowlink, w.index)
-        #             end if
-        #         end for
-        #
-        #         // If v is a root node, pop the stack and generate an SCC
-        #         if v.lowlink = v.index then
-        #             start a new strongly connected component
-        #             repeat
-        #                 w := S.pop()
-        #                 w.onStack := false
-        #                 add w to current strongly connected component
-        #             while w ≠ v
-        #             output the current strongly connected component
-        #         end if
-        #     end function
         # main_list = []
-        # low = {}
+        #
+        # # each node save True if the node have visited, otherwise False
+        # visited = {}
         # nodes = self.graph.get_all_v()
-        # for node in nodes:
-        #     nodes[node].tag = - 1
-        #     low[node] = 0
         #
-        # for i in nodes.keys():
-        #     if nodes[i].tag == - 1:
-        #         self.dfs(i, low)
+        # # for each node tag set the node id and set as not visited
+        # for node in nodes.keys():
+        #     nodes[node].tag = nodes[node].key
+        #     visited[node] = False
         #
-        # print('low:', low)
+        # for node in nodes.keys():
+        #     for i in nodes.keys():
+        #         nodes[i].tag = nodes[i].key
+        #     pq = queue.PriorityQueue()
+        #     previous = {}
+        #     stack = []
+        #     pq.put(node)
+        #     stack.append(node)
+        #     visited[node] = True
+        #     print('start from {}'.format(node))
+        #     start = node
+        #     while not pq.empty():
+        #         pop = pq.get()
+        #         print('\tpop node: {}'.format(pop))
+        #         for ni in self.graph.all_out_edges_of_node(pop):
+        #             print('\t\tgo to ni: {}'.format(ni))
+        #             if visited[ni] is False:
+        #                 print('\t\t\tnode {} not have been visited'.format(ni))
+        #                 stack.append(ni)
+        #                 visited[ni] = True
+        #                 pq.put(ni)
+        #                 previous[ni] = pop
+        #             else:
+        #                 print('\t\t\tnode {} already have been visited'.format(ni))
+        #                 inner_list = []
+        #                 target = nodes[ni].tag
+        #                 prev = previous[ni]
+        #                 inner_list.append(prev)
+        #                 while nodes[prev].tag != target:
+        #                     print('\t\t\t\tgo previous to {}'.format(prev))
+        #                     print('\t\t\t\t\ttarget is {}'.format(target))
+        #                     nodes[prev].tag = target
+        #                     inner_list.append(prev)
+        #                     if start == prev:
+        #                         stack.pop()
+        #                         break
+        #                     prev = previous[prev]
+        #                 main_list.append(inner_list)
+        #                 print(main_list)
+        #
+        # print(main_list)
+
+        # self.index = 0
+        # self.count = 0
+        # stack = []
+        # indexes = {}
+        # low_link = {}
+        # on_stack = {}
+        # for node in nodes.values():
+        #     node.tag = 0
+        #
+        # final_list = []
+        # for node in nodes.values():
+        #     if node.tag == 0:
+        #         final_list.append(self.strong_connect(node.key, stack, indexes, low_link, on_stack))
+        #
+        # for i in nodes.values():
+        #     print(i.key, i.tag)
+        #     print(i.key, indexes[i.key])
+        #
+        # return final_list
+
+    # def strong_connect(self, v: int, stack: list, indexes: dict, low_link: dict, on_stack: list):
+    #     nodes = self.graph.get_all_v()
+    #
+    #     indexes[v] = self.index
+    #     low_link[v] = self.index
+    #     self.index += 1
+    #     stack.append(v)
+    #     on_stack[v] = True
+    #     for w in self.graph.all_out_edges_of_node(v).keys():
+    #         if nodes[w].tag == 0:
+    #             self.strong_connect(w, stack, indexes, low_link, on_stack)
+    #             low_link[v] = min(low_link[v], low_link[w])
+    #         elif not on_stack[w]:
+    #             continue
+    #         else:
+    #             low_link[v] = np.minimum(low_link[v], w)
+    #
+    #     sc = []
+    #     if low_link[v] == v:
+    #         self.count += 1
+    #         while w is not v:
+    #             w = stack.pop()
+    #             nodes[w].tag = self.count
+    #             on_stack[w] = False
+    #             sc.append(w)
+    #
+    #     return sc
 
     def plot_graph(self) -> None:
 
@@ -405,3 +347,32 @@ class GraphAlgo(GraphAlgoInterface):
 
         # show board
         plt.show()
+
+    def bfs(self, node_key: int, upside_down: bool):
+        """
+        gets src and runs bfs algorithm on the graph from src
+        if upside down is true that run the bfs on graph transpose
+        :param node_key:
+        :param upside_down:
+        :return:
+        """
+        # initialize all the tags to -1
+        for node in self.graph.get_all_v().values():
+            node.tag = -1
+        queue = SimpleQueue()
+        src = self.graph.get_all_v().get(node_key)
+        src.tag = 0
+        queue.put(src)
+        while not queue.empty():
+            node_temp = queue.get()
+            # graph as is
+            if upside_down is False:
+                neighbors = self.graph.all_out_edges_of_node(node_temp.key)
+            # graph transpose
+            else:
+                neighbors = self.graph.all_in_edges_of_node(node_temp.key)
+            for key in neighbors:
+                node_neighbor = self.graph.get_all_v().get(key)
+                if node_neighbor.tag == -1:  # the first time this node is reached
+                    node_neighbor.tag = node_temp.tag + 1
+                    queue.put(node_neighbor)
