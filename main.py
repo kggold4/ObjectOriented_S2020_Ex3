@@ -11,8 +11,6 @@ if __name__ == '__main__':
     print('graph:', graphAlgo.get_graph())
     # print('path:', graphAlgo.shortest_path(0, 15))
     main_list = graphAlgo.connected_components()
-    for l in main_list:
-        print('l:', l)
     graphAlgo.plot_graph()
 
     # graphAlgo.save_to_json("graph.json")

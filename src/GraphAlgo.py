@@ -10,6 +10,9 @@ import json
 
 class GraphAlgo(GraphAlgoInterface):
 
+    index = 0
+    count = 0
+
     def __init__(self, graph: GraphInterface):
         self.graph = graph
 
@@ -149,7 +152,6 @@ class GraphAlgo(GraphAlgoInterface):
         return end.weight, path
 
     # def connected_component(self, id1: int) -> list:
-
     #     low = {}
     #     nodes = self.graph.get_all_v()
     #     for node in nodes:
@@ -162,7 +164,7 @@ class GraphAlgo(GraphAlgoInterface):
     #
     #     return low
     #
-    # def dfs(self, i: int, low: dict):
+    # def dfs(self, i: int  , low: dict):
     #     print('new i:', i)
     #     print('low:', low)
     #     nodes = self.graph.get_all_v()
@@ -187,51 +189,51 @@ class GraphAlgo(GraphAlgoInterface):
     #                 break
     #         count += 1
     #         print(count)
-
-        # # nodes dictionary of the graph
-        # nodes = self.graph.get_all_v()
-        #
-        # # reset all tags in the graph to 0
-        # for node in nodes:
-        #     node.tag = 0
-        #
-        # # for each node save the previous node
-        # previous = {}
-        #
-        # # using priority queue for the dfs algorithm
-        # pq = queue.PriorityQueue()
-        #
-        # # add id1 to pq
-        # pq.put(id1)
-        #
-        # # set tag of id1 to 1
-        # nodes[id1].tag = 1
-        #
-        # # create a stack for the current connected component and add id1 to the stacks
-        # stack = [id1]
-        #
-        # # using dfs algorithm
-        # while not pq.empty():
-        #     current_node = pq.get()
-        #     for ni in self.graph.all_out_edges_of_node(current_node):
-        #         if ni not in stack:
-        #             pq.put(ni)
-        #             stack.append(ni)
-        #             previous[ni] = current_node
-        #         else:
-        #              nodes[ni].tag = 1
-        #
-        # current_node = id1
-        #
-        # while True:
-        #     for ni in self.graph.all_out_edges_of_node(current_node):
-        #         if ni not in stack:
-        #             stack.append(ni)
-        #             current_node = ni
+    # # nodes dictionary of the graph
+    # nodes = self.graph.get_all_v()
+    #
+    # # reset all tags in the graph to 0
+    # for node in nodes:
+    #     node.tag = 0
+    #
+    # # for each node save the previous node
+    # previous = {}
+    #
+    # # using priority queue for the dfs algorithm
+    # pq = queue.PriorityQueue()
+    #
+    # # add id1 to pq
+    # pq.put(id1)
+    #
+    # # set tag of id1 to 1
+    # nodes[id1].tag = 1
+    #
+    # # create a stack for the current connected component and add id1 to the stacks
+    # stack = [id1]
+    #
+    # # using dfs algorithm
+    # while not pq.empty():
+    #     current_node = pq.get()
+    #     for ni in self.graph.all_out_edges_of_node(current_node):
+    #         if ni not in stack:
+    #             pq.put(ni)
+    #             stack.append(ni)
+    #             previous[ni] = current_node
+    #         else:
+    #              nodes[ni].tag = 1
+    #
+    # current_node = id1
+    #
+    # while True:
+    #     for ni in self.graph.all_out_edges_of_node(current_node):
+    #         if ni not in stack:
+    #             stack.append(ni)
+    #             current_node = ni
 
     def connected_components(self) -> List[list]:
         nodes = self.graph.get_all_v()
-        index = 0
+        self.index = 0
+        self.count = 0
         stack = []
         indexes = {}
         low_link = {}
@@ -242,31 +244,37 @@ class GraphAlgo(GraphAlgoInterface):
         final_list = []
         for node in nodes.values():
             if node.tag == 0:
-                final_list.append(self.strong_connect(node.key, index, stack, indexes, low_link, on_stack))
+                final_list.append(self.strong_connect(node.key, stack, indexes, low_link, on_stack))
+
+        for i in nodes.values():
+            print(i.key, i.tag)
+            print(i.key, indexes[i.key])
 
         return final_list
 
-    def strong_connect(self, v: int, index: int, stack: list, indexes: dict, low_link: dict, on_stack: list):
+    def strong_connect(self, v: int, stack: list, indexes: dict, low_link: dict, on_stack: list):
         nodes = self.graph.get_all_v()
 
-        indexes[v] = index
-        low_link[v] = index
-        index += 1
+        indexes[v] = self.index
+        low_link[v] = self.index
+        self.index += 1
         stack.append(v)
         on_stack[v] = True
         for w in self.graph.all_out_edges_of_node(v).keys():
             if nodes[w].tag == 0:
-                self.strong_connect(w, index, stack, indexes, low_link, on_stack)
-                x = min(low_link[v], low_link[w])
-                low_link[v] = float(x)
-            elif on_stack[w]:
+                self.strong_connect(w, stack, indexes, low_link, on_stack)
+                low_link[v] = min(low_link[v], low_link[w])
+            elif not on_stack[w]:
+                continue
+            else:
                 low_link[v] = np.minimum(low_link[v], w)
 
         sc = []
         if low_link[v] == v:
-
+            self.count += 1
             while w is not v:
                 w = stack.pop()
+                nodes[w].tag = self.count
                 on_stack[w] = False
                 sc.append(w)
 
@@ -284,58 +292,52 @@ class GraphAlgo(GraphAlgoInterface):
         #     #             output the current strongly connected component
         #     #         end if
         #     #     end function
-
-
-
-
-
         # algorithm tarjan is
-    #     input: graph G = (V, E)
-    #     output: set of strongly connected components (sets of vertices)
-    #
-    #     index := 0
-    #     S := empty stack
-    #     for each v in V do
-    #         if v.index is undefined then
-    #             strongconnect(v)
-    #         end if
-    #     end for
-    #
-    #     function strongconnect(v)
-    #         // Set the depth index for v to the smallest unused index
-    #         v.index := index
-    #         v.lowlink := index
-    #         index := index + 1
-    #         S.push(v)
-    #         v.onStack := true
-    #
-    #         // Consider successors of v
-    #         for each (v, w) in E do
-    #             if w.index is undefined then
-    #                 // Successor w has not yet been visited; recurse on it
-    #                 strongconnect(w)
-    #                 v.lowlink := min(v.lowlink, w.lowlink)
-    #             else if w.onStack then
-    #                 // Successor w is in stack S and hence in the current SCC
-    #                 // If w is not on stack, then (v, w) is an edge pointing to an SCC already found and must be ignored
-    #                 // Note: The next line may look odd - but is correct.
-    #                 // It says w.index not w.lowlink; that is deliberate and from the original paper
-    #                 v.lowlink := min(v.lowlink, w.index)
-    #             end if
-    #         end for
-    #
-    #         // If v is a root node, pop the stack and generate an SCC
-    #         if v.lowlink = v.index then
-    #             start a new strongly connected component
-    #             repeat
-    #                 w := S.pop()
-    #                 w.onStack := false
-    #                 add w to current strongly connected component
-    #             while w ≠ v
-    #             output the current strongly connected component
-    #         end if
-    #     end function
-
+        #     input: graph G = (V, E)
+        #     output: set of strongly connected components (sets of vertices)
+        #
+        #     index := 0
+        #     S := empty stack
+        #     for each v in V do
+        #         if v.index is undefined then
+        #             strongconnect(v)
+        #         end if
+        #     end for
+        #
+        #     function strongconnect(v)
+        #         // Set the depth index for v to the smallest unused index
+        #         v.index := index
+        #         v.lowlink := index
+        #         index := index + 1
+        #         S.push(v)
+        #         v.onStack := true
+        #
+        #         // Consider successors of v
+        #         for each (v, w) in E do
+        #             if w.index is undefined then
+        #                 // Successor w has not yet been visited; recurse on it
+        #                 strongconnect(w)
+        #                 v.lowlink := min(v.lowlink, w.lowlink)
+        #             else if w.onStack then
+        #                 // Successor w is in stack S and hence in the current SCC
+        #                 // If w is not on stack, then (v, w) is an edge pointing to an SCC already found and must be ignored
+        #                 // Note: The next line may look odd - but is correct.
+        #                 // It says w.index not w.lowlink; that is deliberate and from the original paper
+        #                 v.lowlink := min(v.lowlink, w.index)
+        #             end if
+        #         end for
+        #
+        #         // If v is a root node, pop the stack and generate an SCC
+        #         if v.lowlink = v.index then
+        #             start a new strongly connected component
+        #             repeat
+        #                 w := S.pop()
+        #                 w.onStack := false
+        #                 add w to current strongly connected component
+        #             while w ≠ v
+        #             output the current strongly connected component
+        #         end if
+        #     end function
         # main_list = []
         # low = {}
         # nodes = self.graph.get_all_v()
