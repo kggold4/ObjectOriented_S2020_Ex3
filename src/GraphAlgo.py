@@ -19,26 +19,44 @@ import json
 
 
 class GraphAlgo(GraphAlgoInterface):
+    """
+    GraphAlgo class implements GraphAlgoInterface interface
+    """
 
-    """
-    default constructor
-    :param graph to initialize the graph
-    """
+    def __hash__(self) -> int:
+        """
+        hashcode method
+        :return:
+        """
+        return super().__hash__()
+
+    def __eq__(self, o: object) -> bool:
+        """
+        equals method
+        :param o:
+        :return:
+        """
+        return super().__eq__(o)
+
     def __init__(self, graph: GraphInterface = None):
+        """
+        default constructor
+        :param graph: initialize the graph
+        """
         self.graph = graph
 
-    """
-    :return GraphInterface the graph of the graph algo class
-    """
     def get_graph(self) -> GraphInterface:
+        """
+        :return: the init graph
+        """
         return self.graph
 
-    """
-    save the graph to a json file
-    :param file_name the name of the json file to save the graph to
-    :return true if succeed save to file, otherwise false
-    """
     def save_to_json(self, file_name: str = 'graph.json') -> bool:
+        """
+        save the graph to a json file
+        :param file_name: the name of the json file to save the graph to
+        :return: true if succeed save to file, otherwise false
+        """
         try:
             with open(file_name, 'w') as file:
                 json.dump(self.graph, default=lambda m: m.__dict__, indent=4, fp=file)
@@ -47,12 +65,12 @@ class GraphAlgo(GraphAlgoInterface):
             print(e)
             return False
 
-    """
-    load the graph from a json file
-    :param filename the name of the json file to load the graph from
-    :return true if succeed load from file, otherwise false
-    """
     def load_from_json(self, file_name: str = 'graph.json') -> bool:
+        """
+        load the graph from a json file
+        :param file_name: the name of the json file to load the graph from
+        :return: true if succeed load from file, otherwise false
+        """
 
         # create new graph to self graph
         self.graph = DiGraph()
@@ -93,13 +111,13 @@ class GraphAlgo(GraphAlgoInterface):
             print(e)
             return False
 
-    """
-    calculate the shortest path between to nodes
-    :param id1 the source node
-    :param id2 the destination node
-    :return (float, list) the weight between id1 and id2 nodes and the list of the path from id1 to id2
-    """
     def shortest_path(self, id1: int, id2: int) -> (float, list):
+        """
+        compute the shortest path between to nodes
+        :param id1: the source node
+        :param id2: the destination node
+        :return: (float, list) the weight between id1 and id2 nodes and the list of the path from id1 to id2
+        """
 
         # if graph is empty from nodes
         if self.graph.v_size() == 0:
@@ -182,6 +200,11 @@ class GraphAlgo(GraphAlgoInterface):
         return end.weight, path
 
     def connected_component(self, id1: int) -> list:
+        """
+        SCC algorithm for single node
+        :param id1: the node
+        :return: list of the connected_component that id1 contains in
+        """
 
         # if id1 node is not in the graph return empty list
         if id1 not in self.graph.get_all_v().keys():
@@ -209,6 +232,10 @@ class GraphAlgo(GraphAlgoInterface):
         return node_component
 
     def connected_components(self) -> List[list]:
+        """
+        for each node in the graph use connected_component method
+        :return: nested list of all the connected component in the graph
+        """
 
         # if graph is empty return an empty list
         if self.graph.v_size() == 0:
@@ -233,6 +260,10 @@ class GraphAlgo(GraphAlgoInterface):
         return graph_component
 
     def plot_graph(self) -> None:
+        """
+        plot the graph using matplotlib
+        :return:
+        """
 
         # positions list will contains all the positions of all the nodes in the graph
         positions = {}

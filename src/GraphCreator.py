@@ -3,10 +3,21 @@ import random
 
 
 class GraphCreator:
+    """
+    this class creates randomly graph by given |V| and |E| sizes with a seed number
+    """
+    # default size
     size = 25
 
     @staticmethod
     def create_graph(n: int = size, e: int = 0, seed_num: int = 0) -> DiGraph:
+        """
+        create_graph function is a static function that get n, e and seed_num and create randomly a DiGraph
+        :param n: number of nodes
+        :param e: number of edges
+        :param seed_num: random sead
+        :return: the graph that created
+        """
 
         # graph seed number
         random.seed(seed_num)
@@ -47,10 +58,3 @@ class GraphCreator:
                         if edge_counter == e:
                             return graph
         return graph
-    """
-    create_graph function is a static function that get n, e and seed_num and create randomly a DiGraph
-    :param n - number of nodes
-    :param e - number of edges
-    :param seed_num - random sead
-    :return DiGraph - that created
-    """

@@ -4,9 +4,28 @@ from src.NodeData import NodeData
 
 class DiGraph(GraphInterface):
     """
-    default constructor
+    DiGraph implements GraphInterface interface represents a directional weighted graph data structures
     """
+
+    def __eq__(self, o: object) -> bool:
+        """
+        equals method
+        :param o:
+        :return:
+        """
+        return super().__eq__(o)
+
+    def __hash__(self) -> int:
+        """
+        hashcode method
+        :return:
+        """
+        return super().__hash__()
+
     def __init__(self):
+        """
+        default constructor
+        """
         self.nodes = {}
         self.childes = {}
         self.parents = {}
@@ -14,64 +33,65 @@ class DiGraph(GraphInterface):
         self.mc = 0
 
     def __repr__(self):
+        """
+        repr method
+        :return: graph string
+        """
         return str(self.nodes.values()) + str(self.childes)
 
-    """
-    :return the size of nodes in the graph
-    """
     def v_size(self) -> int:
+        """
+        :return: the size of nodes in the graph
+        """
         return len(self.nodes)
 
-    """
-    :return the size of edges in the graph
-    """
     def e_size(self) -> int:
+        """
+        :return: the size of edges in the graph
+        """
         return self.ec
 
-    """
-    :return a dictionary of graph nodes
-    """
     def get_all_v(self) -> dict:
+        """
+        :return: a dictionary of graph nodes
+        """
         return self.nodes
 
-    """
-    :param id1 node key
-    :return a dictionary of all the nodes connected to id1 node
-    """
     def all_in_edges_of_node(self, id1: int) -> dict:
+        """
+        :param id1: node key
+        :return: a dictionary of all the nodes connected to id1 node
+        """
         if id1 in self.nodes:
             return self.parents[id1]
 
-    """
-    :param id1 node key
-    :return a dictionary of all the nodes connected from id1 node
-    """
     def all_out_edges_of_node(self, id1: int) -> dict:
+        """
+        :param id1: node key
+        :return: a dictionary of all the nodes connected from id1 node
+        """
         if id1 in self.nodes:
             return self.childes[id1]
 
-    """
-    :return mode count
-    """
     def get_mc(self) -> int:
+        """
+        :return: graph mode count
+        """
         return self.mc
 
-    """
-    connect between two nodes and weight
-    :param id1 the node1
-    :param id2 the node2
-    :param weight the weight of the edge
-    :return true if nd1 and nd2 connected successfully
-    """
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
+        """
+        connect between two nodes and weight
+        :param id1: the source node
+        :param id2: the destination node
+        :param weight: the weight of the edge
+        :return: true if nd1 and nd2 connected successfully
+        """
 
         # cannot be connected
         # id1 or id2 cannot be found int the graph
         if id1 not in self.nodes.keys() or id2 not in self.nodes.keys() or len(self.nodes) <= 1 or id1 == id2:
             return False
-
-        # getting NodeData objects of id1
-        node1 = self.nodes.get(id1)
 
         # if node1 and node2 is connected
         if id2 in self.childes.get(id1):
@@ -95,13 +115,13 @@ class DiGraph(GraphInterface):
             self.mc += 1
             return True
 
-    """
-    adding node to the graph
-    :param node_id the key of the node
-    :param pos node position
-    :return true if succeed by adding the node
-    """
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
+        """
+        adding node to the graph
+        :param node_id: node_id the key of the node
+        :param pos: pos node position
+        :return: true if succeed by adding the node
+        """
         if node_id in self.nodes.keys():
             return False
         else:
@@ -111,11 +131,11 @@ class DiGraph(GraphInterface):
             self.mc += 1
             return True
 
-    """
-    :param node_id
-    :return true if succeed by removing the node
-    """
     def remove_node(self, node_id: int) -> bool:
+        """
+        :param node_id:
+        :return: true if succeed by removing the node
+        """
 
         # if node_id cannot be found in the graph
         if node_id not in self.nodes.keys():
@@ -142,12 +162,12 @@ class DiGraph(GraphInterface):
             self.nodes.pop(node_id)
             self.mc += 1
 
-    """
-    :param node_id1 node key
-    :param node_id2 node key
-    :return true 
-    """
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
+        """
+        :param node_id1: source node
+        :param node_id2: destination node
+        :return: true if succeed by removing the connection
+        """
 
         # if node_id1 or node_id2 cannot be found in the graph
         if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys()\
@@ -159,13 +179,3 @@ class DiGraph(GraphInterface):
             self.ec -= 1
             self.mc += 1
             return True
-
-
-if __name__ == '__main__':
-    g = DiGraph()
-    g.add_node(1)
-    g.add_node(2)
-    g.add_node(3)
-    g.add_edge(1, 2, 5)
-    print(g.all_in_edges_of_node(1))
-    print(g.all_out_edges_of_node(1))
