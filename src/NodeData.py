@@ -3,12 +3,12 @@ import numpy as np
 
 class NodeData:
     def __init__(self, key: int = None, position: tuple = None, weight: float = 0, tag: int = 0, info: str = ""):
-        self.connected_component =  None
         self.key = key
         self.position = position
         self.weight = weight
         self.tag = tag
         self.info = info
+        self.scc_key = None
 
     def __repr__(self):
         return str(self.key)
@@ -26,9 +26,8 @@ class NodeData:
             return np.sqrt((np.power(self.position[0] - node.position[0], 2)) +
                            (np.power(self.position[1] - node.position[1], 2)))
 
-    def set_connected_component(self, key: int):
-        """
-            set the SCC for this node
-            @param key: The representive node of the SCC
-        """
-        self.connected_component = key
+    def set_scc(self, scc_key: int):
+        self.scc_key = scc_key
+
+    def get_scc(self) -> int:
+        return self.scc_key

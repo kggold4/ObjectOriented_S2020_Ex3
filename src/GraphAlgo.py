@@ -187,39 +187,50 @@ class GraphAlgo(GraphAlgoInterface):
         if id1 not in self.graph.get_all_v().keys():
             return []
 
+        node_component = []
+
         # using bfs on id1 as src
         ExternalAlgo.bfs(id1, False, self.graph)
-        component = []
 
         # each edge the reachable from src add to component
         for node in self.graph.get_all_v().values():
             if node.tag != -1:
-                component.append(node)
+                node_component.append(node)
 
         # using bfs on id1 as src in another direction
         ExternalAlgo.bfs(id1, True, self.graph)
 
-        # if still found reachable edges add to component
-        # dealt all of the nodes that are not reachable
-        component = [node for node in component if node.tag != -1]
-        for node in component:
-            node.set_connected_component(id1)  # update their SCC to src
-        return component
+        # delete from component all the nodes that not reachable
+        node_component = [node for node in node_component if node.tag != -1]
+
+        # for each node in the component update his scc_key to id1 key
+        for node in node_component:
+            node.set_scc(id1)
+        return node_component
 
     def connected_components(self) -> List[list]:
+
+        # if graph is empty return an empty list
         if self.graph.v_size() == 0:
             return []
-            # reset all the components
+
+        # the main graph_component list for all nodes components list
+        graph_component = []
+
+        # reset all the nodes scc_key to None
         for node in self.graph.get_all_v().values():
-            node.set_connected_component(None)
-        my_list = []
-        # for each node check if its SCC is None is yes  runs connected_components(node)
-        # and its SCC  to the list of SCC
+            node.set_scc(None)
+
+        # for each node if the scc_key is equal to Node use connected_components method to check his scc_key
         for node in self.graph.get_all_v().values():
-            if node.connected_component is None:
-                list_help = self.connected_component(node.key)
-                my_list.append(list_help)
-        return my_list
+            if node.scc_key is None:
+                node_component = self.connected_component(node.key)
+
+                # add node_component to graph_component
+                graph_component.append(node_component)
+
+        # return graph_component that contains all node_component of the graph
+        return graph_component
 
     def plot_graph(self) -> None:
 
