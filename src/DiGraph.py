@@ -63,7 +63,7 @@ class DiGraph(GraphInterface):
         :return: a dictionary of all the nodes connected to id1 node
         """
         if id1 in self.nodes:
-            return self.parents[id1]
+            return self.parents.get(id1)
 
     def all_out_edges_of_node(self, id1: int) -> dict:
         """
@@ -71,7 +71,7 @@ class DiGraph(GraphInterface):
         :return: a dictionary of all the nodes connected from id1 node
         """
         if id1 in self.nodes:
-            return self.childes[id1]
+            return self.childes.get(id1)
 
     def get_mc(self) -> int:
         """

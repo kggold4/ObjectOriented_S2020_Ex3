@@ -17,9 +17,28 @@ class TestGraphAlgo(TestCase):
         graphAlgo1.save_to_json('graph.json')
         graphAlgo2 = GraphAlgo()
         graphAlgo2.load_from_json('graph.json')
-        print('graph 1 is {}'.format(graphAlgo1.get_graph()))
-        print('graph 2 is {}'.format(graphAlgo2.get_graph()))
-        graphAlgo1.plot_graph()
+        print('graphAlgo1 {}'.format(graphAlgo1.get_graph()))
+        print('graphAlgo2 {}'.format(graphAlgo2.get_graph()))
+        print('graphAlgo1 e size {}'.format(graphAlgo1.get_graph().e_size()))
+        print('graphAlgo2 e size {}'.format(graphAlgo2.get_graph().e_size()))
+        print('graphAlgo1 v size {}'.format(graphAlgo1.get_graph().v_size()))
+        print('graphAlgo2 v size {}'.format(graphAlgo2.get_graph().v_size()))
+        for i in range(graphAlgo1.get_graph().v_size()):
+            print('graphAlgo1 childes {}'.format(graphAlgo1.get_graph().all_out_edges_of_node(i)))
+            print('graphAlgo2 childes {}'.format(graphAlgo2.get_graph().all_out_edges_of_node(i)))
+
+        # print('graph 1 is {}'.format(graphAlgo1.get_graph()))
+        # print('graph 2 is {}'.format(graphAlgo2.get_graph()))
+        # nodes1 = graphAlgo1.get_graph().get_all_v()
+        # nodes2 = graphAlgo1.get_graph().get_all_v()
+        # assert nodes1 is nodes2
+        #
+        # for i in nodes1.keys():
+        #     childes1 = graphAlgo1.get_graph().all_out_edges_of_node(i)
+        #     childes2 = graphAlgo2.get_graph().all_out_edges_of_node(i)
+        #     print('childes1:', childes1)
+        #     print('childes2:', childes2)
+        #     assert childes1 == childes2
         # assert graphAlgo1.get_graph.v_size() is graphAlgo2.get_graph.v_size()
         # assert graphAlgo1.get_graph.e_size() is graphAlgo2.get_graph.e_size()
 

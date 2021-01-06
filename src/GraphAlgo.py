@@ -43,7 +43,10 @@ class GraphAlgo(GraphAlgoInterface):
         default constructor
         :param graph: initialize the graph
         """
-        self.graph = graph
+        if graph is None:
+            self.graph = GraphAlgo
+        else:
+            self.graph = graph
 
     def get_graph(self) -> GraphInterface:
         """
@@ -94,17 +97,22 @@ class GraphAlgo(GraphAlgoInterface):
 
                 # add each node childes to self graph
                 for k, v in json_graph.get('childes').items():
-                    childes[k] = v
+                    v = {int(m): n for m, n in v.items()}
+                    childes[int(k)] = dict(v)
                 self.graph.childes = childes
 
                 # add each node parents to self graph
                 for k, v in json_graph.get('parents').items():
-                    parents[k] = v
+                    v = {int(m): n for m, n in v.items()}
+                    parents[int(k)] = dict(v)
                 self.graph.parents = parents
 
                 # getting the mode count and edge count from the json
                 self.graph.mc = json_graph.get("mc")
                 self.graph.ec = json_graph.get("ec")
+                for i in range(self.get_graph().v_size()):
+                    print(self.graph.all_out_edges_of_node(i))
+                    print('s!', self.graph.childes.get(i))
 
             return True
         except IOError as e:
