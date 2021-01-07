@@ -51,52 +51,50 @@ class TestDiGraph(TestCase):
     def test_all_in_edges_of_node(self):
         global size
         same_seed = 1
-        graph = GraphCreator.create_graph(size, 10, same_seed)
+        graph = GraphCreator.create_graph(size, 50, same_seed)
         parents = graph.all_in_edges_of_node(0)
-        assert 15 in parents.keys()
+
+        assert 21 in parents.keys()
         parents = graph.all_in_edges_of_node(2)
-        assert 7 in parents
+        assert 19 in parents
         parents = graph.all_in_edges_of_node(11)
-        assert 9 in parents
+        assert 7 in parents
         parents = graph.all_in_edges_of_node(12)
-        assert 4 in parents
+        assert 19 in parents
         parents = graph.all_in_edges_of_node(15)
         assert 1 in parents
         parents = graph.all_in_edges_of_node(17)
-        assert 16 in parents
+        assert 22 in parents
         parents = graph.all_in_edges_of_node(18)
-        assert 2 in parents
+        assert 0 in parents
         parents = graph.all_in_edges_of_node(19)
-        assert 12 in parents
+        assert 18 in parents
         parents = graph.all_in_edges_of_node(22)
-        assert 6 in parents
-        parents = graph.all_in_edges_of_node(24)
         assert 8 in parents
+        parents = graph.all_in_edges_of_node(24)
+        assert 12 in parents
 
     def test_all_out_edges_of_node(self):
         global size
         same_seed = 1
         graph = GraphCreator.create_graph(size, 10, same_seed)
         childes = graph.all_out_edges_of_node(1)
+        print('childes: ', graph.childes)
         assert 15 in childes
         childes = graph.all_out_edges_of_node(2)
-        assert 18 in childes
+        assert 16 in childes
         childes = graph.all_out_edges_of_node(4)
-        assert 12 in childes
+        assert 15 in childes
         childes = graph.all_out_edges_of_node(6)
-        assert 22 in childes
+        assert 13 in childes
         childes = graph.all_out_edges_of_node(7)
-        assert 2 in childes
-        childes = graph.all_out_edges_of_node(8)
-        assert 24 in childes
-        childes = graph.all_out_edges_of_node(9)
         assert 11 in childes
+        childes = graph.all_out_edges_of_node(8)
+        assert 22 in childes
+        childes = graph.all_out_edges_of_node(9)
+        assert 23 in childes
         childes = graph.all_out_edges_of_node(12)
-        assert 19 in childes
-        childes = graph.all_out_edges_of_node(15)
-        assert 0 in childes
-        childes = graph.all_out_edges_of_node(16)
-        assert 17 in childes
+        assert 24 in childes
         assert isinstance(childes, dict)
 
     def test_get_mc(self):

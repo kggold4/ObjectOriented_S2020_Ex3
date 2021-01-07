@@ -44,7 +44,7 @@ class GraphAlgo(GraphAlgoInterface):
         :param graph: initialize the graph
         """
         if graph is None:
-            self.graph = GraphAlgo
+            self.graph = DiGraph()
         else:
             self.graph = graph
 
@@ -80,40 +80,38 @@ class GraphAlgo(GraphAlgoInterface):
 
         # create nodes, childes and parents dictionary for the load graph
         nodes = {}
-        childes = {}
         parents = {}
 
         # trying to read from the json file
         try:
             with open(file_name, 'r') as file:
 
+                print('load!:\n')
+
                 # get json of the graph from file
                 json_graph = json.load(file)
 
                 # add each node to self graph
                 for k, v in json_graph.get('nodes').items():
-                    nodes[k] = NodeData(**v)
-                self.graph.nodes = nodes
+                    nodes[int(k)] = NodeData(**v)
+                    self.graph.add_node(v["key"], v["position"])
 
                 # add each node childes to self graph
-                for k, v in json_graph.get('childes').items():
-                    v = {int(m): n for m, n in v.items()}
-                    childes[int(k)] = dict(v)
-                self.graph.childes = childes
+                childes = json_graph.get('childes').items()
+                # {node_id: {{node_id: weight},{},{},{}}}
+                for k, v in childes:
+                    for c, d in v.items():
+                        self.graph.add_edge(k, c, d)
 
                 # add each node parents to self graph
-                for k, v in json_graph.get('parents').items():
-                    v = {int(m): n for m, n in v.items()}
-                    parents[int(k)] = dict(v)
-                self.graph.parents = parents
+                # for k, v in json_graph.get('parents').items():
+                #     v = {int(m): n for m, n in v.items()}
+                #     parents[int(k)] = dict(v)
+                # self.graph.parents = parents
 
                 # getting the mode count and edge count from the json
                 self.graph.mc = json_graph.get("mc")
                 self.graph.ec = json_graph.get("ec")
-                for i in range(self.get_graph().v_size()):
-                    print(self.graph.all_out_edges_of_node(i))
-                    print('s!', self.graph.childes.get(i))
-
             return True
         except IOError as e:
             print(e)
@@ -305,7 +303,7 @@ class GraphAlgo(GraphAlgoInterface):
             childes = self.graph.all_out_edges_of_node(i)
 
             # go throw node childes
-            for j in childes:
+            for j in childes.keys():
                 # get source and destination positions
                 source = positions[i]
                 destination = positions[j]

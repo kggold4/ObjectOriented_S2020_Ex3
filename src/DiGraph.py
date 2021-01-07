@@ -90,6 +90,8 @@ class DiGraph(GraphInterface):
 
         # cannot be connected
         # id1 or id2 cannot be found int the graph
+        id1 = int(id1)
+        id2 = int(id2)
         if id1 not in self.nodes.keys() or id2 not in self.nodes.keys() or len(self.nodes) <= 1 or id1 == id2:
             return False
 
@@ -109,6 +111,7 @@ class DiGraph(GraphInterface):
 
         # if node1 and node2 is not connected
         else:
+            # print('add new edge between {} and {} with {} weight'.format(id1, id2, weight))
             self.childes[id1][id2] = weight
             self.parents[id2][id1] = weight
             self.ec += 1
@@ -122,6 +125,7 @@ class DiGraph(GraphInterface):
         :param pos: pos node position
         :return: true if succeed by adding the node
         """
+        node_id = int(node_id)
         if node_id in self.nodes.keys():
             return False
         else:
@@ -137,6 +141,7 @@ class DiGraph(GraphInterface):
         :return: true if succeed by removing the node
         """
 
+        node_id = int(node_id)
         # if node_id cannot be found in the graph
         if node_id not in self.nodes.keys():
             return False
@@ -169,6 +174,8 @@ class DiGraph(GraphInterface):
         :return: true if succeed by removing the connection
         """
 
+        node_id1 = int(node_id1)
+        node_id2 = int(node_id2)
         # if node_id1 or node_id2 cannot be found in the graph
         if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys()\
                 or len(self.nodes) <= 1 or node_id1 == node_id2:
