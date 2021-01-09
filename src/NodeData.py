@@ -1,5 +1,5 @@
-# use numpy library in distance method
-import numpy as np
+import json
+import math
 
 
 class NodeData:
@@ -65,8 +65,8 @@ class NodeData:
         if self.position is None or node.position is None:
             return -1
         else:
-            return float(np.sqrt((np.power(self.position[0] - node.position[0], 2)) +
-                                 (np.power(self.position[1] - node.position[1], 2))))
+            return float(math.sqrt((math.pow(self.position[0] - node.position[0], 2)) +
+                                   (math.pow(self.position[1] - node.position[1], 2))))
 
     def set_scc(self, scc_key: int):
         """

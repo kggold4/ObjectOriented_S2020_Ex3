@@ -58,3 +58,7 @@ class GraphCreator:
                         if edge_counter == e:
                             return graph
         return graph
+
+    @staticmethod
+    def get_position() -> tuple:
+        return random.random() * 10, random.random() * 10

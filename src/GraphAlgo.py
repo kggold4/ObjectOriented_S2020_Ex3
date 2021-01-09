@@ -1,6 +1,7 @@
 from src.GraphAlgoInterface import GraphAlgoInterface
 from src.GraphInterface import GraphInterface
 from src.DiGraph import DiGraph, NodeData
+import json
 
 # using bfs from external algo class
 from src.ExternalAlgo import ExternalAlgo
@@ -62,7 +63,23 @@ class GraphAlgo(GraphAlgoInterface):
         """
         try:
             with open(file_name, 'w') as file:
-                json.dump(self.graph, default=lambda m: m.__dict__, indent=4, fp=file)
+                Nodes = []
+                Edges = []
+                for k, v in self.graph.get_all_v().items():
+                    if v.position is not None:
+                        Nodes.append({"id": k, "position": v.position})
+                    else:
+                        Nodes.append({"id": k})
+                    destination = self.graph.all_out_edges_of_node(k)
+                    if len(destination) > 0:
+                        for d, w in destination.items():
+                            Edges.append({
+                                "src": k,
+                                "w": w,
+                                "dest": d
+                            })
+                save = {"Edges": Edges, "Nodes": Nodes}
+                json.dump(save, default=lambda m: m.__dict__, indent=4, fp=file)
             return True
         except IOError as e:
             print(e)
@@ -78,10 +95,6 @@ class GraphAlgo(GraphAlgoInterface):
         # create new graph to self graph
         self.graph = DiGraph()
 
-        # create nodes, childes and parents dictionary for the load graph
-        nodes = {}
-        parents = {}
-
         # trying to read from the json file
         try:
             with open(file_name, 'r') as file:
@@ -91,27 +104,19 @@ class GraphAlgo(GraphAlgoInterface):
                 # get json of the graph from file
                 json_graph = json.load(file)
 
-                # add each node to self graph
-                for k, v in json_graph.get('nodes').items():
-                    nodes[int(k)] = NodeData(**v)
-                    self.graph.add_node(v["key"], v["position"])
+                Nodes = json_graph.get("Nodes")
 
-                # add each node childes to self graph
-                childes = json_graph.get('childes').items()
-                # {node_id: {{node_id: weight},{},{},{}}}
-                for k, v in childes:
-                    for c, d in v.items():
-                        self.graph.add_edge(k, c, d)
+                for n in Nodes:
+                    if len(n) > 1:
+                        self.graph.add_node(node_id=n["id"], pos=n["position"])
+                    else:
+                        self.graph.add_node(n["id"])
 
-                # add each node parents to self graph
-                # for k, v in json_graph.get('parents').items():
-                #     v = {int(m): n for m, n in v.items()}
-                #     parents[int(k)] = dict(v)
-                # self.graph.parents = parents
+                Edges = json_graph.get("Edges")
 
-                # getting the mode count and edge count from the json
-                self.graph.mc = json_graph.get("mc")
-                self.graph.ec = json_graph.get("ec")
+                for e in Edges:
+                    self.graph.add_edge(id1=e["src"], id2=e["dest"], weight=e["w"])
+
             return True
         except IOError as e:
             print(e)

@@ -12,40 +12,63 @@ class TestGraphAlgo(TestCase):
         assert graph is graphAlgo.get_graph()
 
     def test_save_to_load_from_json(self):
+
+        # create randomly graph
         graph = GraphCreator.create_graph(size, edges, seed)
         graphAlgo1 = GraphAlgo(graph)
-        graphAlgo1.save_to_json('graph.json')
-        graphAlgo2 = GraphAlgo()
-        graphAlgo2.load_from_json('graph.json')
-        print('graphAlgo1 {}'.format(graphAlgo1.get_graph()))
-        print('graphAlgo2 {}'.format(graphAlgo2.get_graph()))
-        print('graphAlgo1 e size {}'.format(graphAlgo1.get_graph().e_size()))
-        print('graphAlgo2 e size {}'.format(graphAlgo2.get_graph().e_size()))
-        print('graphAlgo1 v size {}'.format(graphAlgo1.get_graph().v_size()))
-        print('graphAlgo2 v size {}'.format(graphAlgo2.get_graph().v_size()))
-        for i in range(graphAlgo1.get_graph().v_size()):
-            print('graphAlgo1 childes {}'.format(graphAlgo1.get_graph().all_out_edges_of_node(i)))
-            print('graphAlgo2 childes {}'.format(graphAlgo2.get_graph().all_out_edges_of_node(i)))
 
-        # print('graph 1 is {}'.format(graphAlgo1.get_graph()))
-        # print('graph 2 is {}'.format(graphAlgo2.get_graph()))
-        # nodes1 = graphAlgo1.get_graph().get_all_v()
-        # nodes2 = graphAlgo1.get_graph().get_all_v()
-        # assert nodes1 is nodes2
-        #
-        # for i in nodes1.keys():
-        #     childes1 = graphAlgo1.get_graph().all_out_edges_of_node(i)
-        #     childes2 = graphAlgo2.get_graph().all_out_edges_of_node(i)
-        #     print('childes1:', childes1)
-        #     print('childes2:', childes2)
-        #     assert childes1 == childes2
-        # assert graphAlgo1.get_graph.v_size() is graphAlgo2.get_graph.v_size()
-        # assert graphAlgo1.get_graph.e_size() is graphAlgo2.get_graph.e_size()
+        # save the graph to a json file
+        graphAlgo1.save_to_json('graph.json')
+
+        # create another graph
+        graphAlgo2 = GraphAlgo()
+
+        # load the graph from a file
+        graphAlgo2.load_from_json('graph.json')
+
+        # check of the graphs have the same nodes
+        for i in graph.get_all_v().keys():
+            assert graphAlgo1.get_graph().get_all_v().get(i).key is graphAlgo2.get_graph().get_all_v().get(i).key
+
+        # same mc
+        assert graphAlgo1.get_graph().get_mc() is graphAlgo2.get_graph().get_mc()
+
+        # same edge size
+        assert graphAlgo1.get_graph().e_size() is graphAlgo2.get_graph().e_size()
+
+        # same node size
+        assert graphAlgo1.get_graph().v_size() is graphAlgo2.get_graph().v_size()
+
+        # same chides and parent
+        for i in graph.get_all_v().keys():
+            childes1 = graphAlgo1.get_graph().all_out_edges_of_node(i)
+            childes2 = graphAlgo2.get_graph().all_out_edges_of_node(i)
+            parents1 = graphAlgo1.get_graph().all_in_edges_of_node(i)
+            parents2 = graphAlgo2.get_graph().all_in_edges_of_node(i)
+
+            for j in childes1.keys():
+                assert childes1[j] == childes2[j]
+            for j in parents1.keys():
+                assert parents1[j] == parents2[j]
 
     def test_shortest_path(self):
-        graph = GraphCreator.create_graph(size, edges, seed)
+        graph = GraphCreator.create_graph(10, 40, 5)
         graphAlgo = GraphAlgo(graph)
-        print(graphAlgo.shortest_path(0,10))
+        sp = graphAlgo.shortest_path(6, 8)
+        distance = 15.385325889119228
+        path = [6, 5, 9, 8]
+        print(sp[0])
+        print(distance)
+        print(sp[1])
+        assert float(sp[0]) == float(distance)
+        j = 0
+        for i in sp[1]:
+            # assert i == path[j]
+            print(i)
+            print(path[j])
+            print(type(i))
+            print(type(path[j]))
+            j += 1
 
     # def test_connected_component(self):
         # self.fail()
