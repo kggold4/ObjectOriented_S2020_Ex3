@@ -57,24 +57,40 @@ class TestGraphAlgo(TestCase):
         sp = graphAlgo.shortest_path(6, 8)
         distance = 15.385325889119228
         path = [6, 5, 9, 8]
-        print(sp[0])
-        print(distance)
-        print(sp[1])
         assert float(sp[0]) == float(distance)
         j = 0
         for i in sp[1]:
-            # assert i == path[j]
-            print(i)
-            print(path[j])
-            print(type(i))
-            print(type(path[j]))
+            assert i.key == path[j]
             j += 1
 
-    # def test_connected_component(self):
-        # self.fail()
+    def test_connected_component(self):
+        graph = GraphCreator.create_graph(40, 90, 6)
+        graphAlgo = GraphAlgo(graph)
+        scc = graphAlgo.connected_component(0)
+        demo_scc = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                    17, 18, 23, 24, 26, 27, 28, 30, 31, 32, 34, 35, 38, 39]
 
-    # def test_connected_components(self):
-        # self.fail()
+        for i in range(len(demo_scc)):
+            assert scc[i].key == demo_scc[i]
 
-    # def test_plot_graph(self):
-        # self.fail()
+    def test_connected_components(self):
+        graph = GraphCreator.create_graph(40, 90, 6)
+        graphAlgo = GraphAlgo(graph)
+        scc = graphAlgo.connected_components()
+        print(scc)
+        demo_scc = [[0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+                     17, 18, 23, 24, 26, 27, 28, 30, 31, 32, 34, 35, 38, 39],
+                    [1], [19], [20], [21], [22], [25], [29], [33], [36], [37]]
+
+        for i in range(len(demo_scc)):
+            demo_scc_list = demo_scc[i]
+            scc_list = scc[i]
+            index = 0
+            for j in demo_scc_list:
+                assert j == scc_list[index].key
+                index += 1
+
+    def test_plot_graph(self):
+        graph = GraphCreator.create_graph(500, 350, 20)
+        graphAlgo = GraphAlgo(graph)
+        assert graphAlgo.plot_graph() is None

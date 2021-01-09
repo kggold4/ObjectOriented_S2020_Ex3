@@ -1,6 +1,8 @@
 import json
 import math
 
+from GraphCreator import GraphCreator
+
 
 class NodeData:
     """
@@ -54,8 +56,12 @@ class NodeData:
     def get_pos(self) -> tuple:
         """
         :return: node position
+        if the position of the node is None, create new position from get_position function from GraphCreator class
         """
-        return self.position
+        if self.position is None:
+            return GraphCreator.get_position()
+        else:
+            return self.position
 
     def distance(self, node) -> float:
         """

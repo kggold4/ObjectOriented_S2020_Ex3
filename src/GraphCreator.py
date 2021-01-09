@@ -61,4 +61,7 @@ class GraphCreator:
 
     @staticmethod
     def get_position() -> tuple:
+        """
+        :return: a tuple with randomly (x ,y) coordinates
+        """
         return random.random() * 10, random.random() * 10

@@ -99,8 +99,6 @@ class GraphAlgo(GraphAlgoInterface):
         try:
             with open(file_name, 'r') as file:
 
-                print('load!:\n')
-
                 # get json of the graph from file
                 json_graph = json.load(file)
 
@@ -132,14 +130,14 @@ class GraphAlgo(GraphAlgoInterface):
 
         # if graph is empty from nodes
         if self.graph.v_size() == 0:
-            return None
+            return float('inf'), []
 
         # getting all graph nodes dictionary
         nodes = self.graph.get_all_v()
 
         # check if one of the nodes cannot be found in the graph
         if id1 not in nodes.keys() or id2 not in nodes.keys():
-            return None
+            return float('inf'), []
 
         # getting start and end nodes
         start = nodes[id1]
@@ -151,7 +149,7 @@ class GraphAlgo(GraphAlgoInterface):
 
         # if the nodes in the graph and not the same node but the graph does not have any edges
         if self.graph.e_size() == 0:
-            return None
+            return float('inf'), []
 
         # set all weights of all nodes to infinity
         for node in nodes.values():
@@ -198,7 +196,7 @@ class GraphAlgo(GraphAlgoInterface):
 
             # if the nodes are in the graph but no valid path between them
             if k.key not in previous.keys():
-                return None
+                return float('inf'), []
 
             # go to previous node
             k = previous[k.key]
