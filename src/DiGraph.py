@@ -1,6 +1,5 @@
 from src.GraphInterface import GraphInterface
 from src.NodeData import NodeData
-import json
 
 
 class DiGraph(GraphInterface):
