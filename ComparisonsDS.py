@@ -1,5 +1,6 @@
 from src.GraphAlgo import GraphAlgo
 import networkx as nx
+import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
 import time
 import json
@@ -40,11 +41,11 @@ def execute(file_name):
     millis_at_end = current_time()
     print('X - load:', millis_at_end - millis_at_start, 'ms')
 
-    # # graphAlgo shortest path
-    # millis_at_start = current_time()
-    # graphAlgo.shortest_path(0, 9)
-    # millis_at_end = current_time()
-    # print('shortest_path:', millis_at_end - millis_at_start, 'ms')
+    # graphAlgo shortest path
+    millis_at_start = current_time()
+    graphAlgo.shortest_path(0, 9)
+    millis_at_end = current_time()
+    print('shortest_path:', millis_at_end - millis_at_start, 'ms')
 
     # networkX shortest path
     millis_at_start = current_time()
@@ -56,10 +57,10 @@ def execute(file_name):
     print('X - shortest_path:', millis_at_end - millis_at_start, 'ms')
 
     # graphAlgo connected component
-    # millis_at_start = current_time()
-    # graphAlgo.connected_component(0)
-    # millis_at_end = current_time()
-    # print('connected_component:', millis_at_end - millis_at_start, 'ms')
+    millis_at_start = current_time()
+    graphAlgo.connected_component(0)
+    millis_at_end = current_time()
+    print('connected_component:', millis_at_end - millis_at_start, 'ms')
 
     # networkX connected component
     millis_at_start = current_time()
@@ -71,10 +72,10 @@ def execute(file_name):
     print('X - connected_component:', millis_at_end - millis_at_start, 'ms')
 
     # graphAlgo connected components
-    # millis_at_start = current_time()
-    # graphAlgo.connected_components()
-    # millis_at_end = current_time()
-    # print('connected_components:', millis_at_end - millis_at_start, 'ms')
+    millis_at_start = current_time()
+    graphAlgo.connected_components()
+    millis_at_end = current_time()
+    print('connected_components:', millis_at_end - millis_at_start, 'ms')
 
     # networkX connected components
     millis_at_start = current_time()
