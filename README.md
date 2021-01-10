@@ -192,3 +192,10 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
         <td>3 <i>ms</i></td>
     </tr>
 </table>
+
+### <i>To clone this project:</i>
+```
+git clone https://github.com/kggold4/ObjectOriented_S2020_Ex3.git
+```
+
+* for more information about the implementation and development process of this project look in our wiki page
