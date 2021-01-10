@@ -4,6 +4,8 @@
 this project is to implement directed weighted data structure and graph algorithms using Python Programming language, in this project we have three parts:
 </i>
 
+<br>
+
 ## Part 1 - DiGraph class:
 Build directed weighted graph data structure (DiGraph class) implements the GraphInterface abstract class (as an interface).
 in this Class we implement those methods:
@@ -19,6 +21,8 @@ in this Class we implement those methods:
 9. ``remove_node(node_id)`` - remove node from the graph and all the connections with other nodes
 10. ``remove_edge(node1_id, node2_id)`` - removing connection between node1_id and node2_id
 
+<br>
+
 ## Part 2 - GraphAlgo class:
 Build graph algorithms class for the directed and wighted graphs.
 in this Class we implement those methods:
@@ -31,11 +35,15 @@ in this Class we implement those methods:
 6. ``connected_components()`` - for each node in the graph use connected_component method and compute all graph strongly connected components and return a nested list of all the connected component in the graph 
 7. ``plot_graph()`` - plot the graph wo a window using matplotlib
 
+<br>
+
 ## Part 3 - Comparisons:
 In this part we compare our algorithms between our Ex2 assignment algorithms that we build in java - see in <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex2.git">Object-Oriented Ex2</a>,
 and with NetworkX library algorithms - see in <a href="https://networkx.org/">networkx.org</a>
 
-### Algorithms Performance Comparisons:
+<br>
+
+### <i>Algorithms Performance Comparisons:</i>
 
 <table>
     <tr>
@@ -89,6 +97,8 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
     </tr>
 </table>
 
+<br>
+
 <table>
     <tr>
         <td><strong><i>Java</i></strong></td>
@@ -140,6 +150,8 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
         <td>35028 <i>ms</i></td>
     </tr>
 </table>
+
+<br>
 
 <table>
     <tr>
@@ -193,8 +205,12 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
     </tr>
 </table>
 
-### <i>Example for ploting the graph using matplotlib</i>
+<br>
+
+### <i>Example of ploting the graph using matplotlib:</i>
 <img src="https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/Figure_1.png">
+
+<br>
 
 ### <i>To clone this project:</i>
 ```
