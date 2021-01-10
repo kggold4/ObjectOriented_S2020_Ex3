@@ -106,7 +106,7 @@ class GraphAlgo(GraphAlgoInterface):
 
                 for n in Nodes:
                     if len(n) > 1:
-                        self.graph.add_node(node_id=n["id"], pos=n["position"])
+                        self.graph.add_node(node_id=n["id"], pos=n["pos"])
                     else:
                         self.graph.add_node(n["id"])
 
