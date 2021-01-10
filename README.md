@@ -37,21 +37,158 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
 
 ### Algorithms Performance Comparisons:
 
-#### Python:
-
-##### G_10_80_0:
-
 <table>
     <tr>
-        <td>
-            load to file
-        </td>
-        <td>
-            1 ms
-        </td>
+        <td><strong><i>Python</i></strong></td>
+        <td><i>load_from_json()</i></td>
+        <td><i>shortest_path()</i></td>
+        <td><i>connected_component()</i></td>
+        <td><i>connected_components()</i></td>
+    </tr>
+    <tr>
+        <td><i>G_10_80_0:</i></td>
+        <td>1 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_100_800_0:</i></td>
+        <td>2 <i>ms</i></td>
+        <td>4 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>1 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_1000_8000_0:</i></td>
+        <td>21 <i>ms</i></td>
+        <td>85 <i>ms</i></td>
+        <td>6 <i>ms</i></td>
+        <td>6 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_10000_80000_0:</i></td>
+        <td>263 <i>ms</i></td>
+        <td>1150 <i>ms</i></td>
+        <td>81 <i>ms</i></td>
+        <td>593 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_20000_160000_0:</i></td>
+        <td>514 <i>ms</i></td>
+        <td>3348 <i>ms</i></td>
+        <td>186 <i>ms</i></td>
+        <td>1814 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_30000_240000_0:</i></td>
+        <td>817 <i>ms</i></td>
+        <td>6684 <i>ms</i></td>
+        <td>347 <i>ms</i></td>
+        <td>5536 <i>ms</i></td>
     </tr>
 </table>
 
-#### Java:
+<table>
+    <tr>
+        <td><strong><i>Java</i></strong></td>
+        <td><i>load_from_json()</i></td>
+        <td><i>shortest_path()</i></td>
+        <td><i>connected_component()</i></td>
+        <td><i>connected_components()</i></td>
+    </tr>
+    <tr>
+        <td><i>G_10_80_0:</i></td>
+        <td>74 <i>ms</i></td>
+        <td>1 <i>ms</i></td>
+        <td>21 <i>ms</i></td>
+        <td>18 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_100_800_0:</i></td>
+        <td>96 <i>ms</i></td>
+        <td>19 <i>ms</i></td>
+        <td>26 <i>ms</i></td>
+        <td>25 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_1000_8000_0:</i></td>
+        <td>121 <i>ms</i></td>
+        <td>88 <i>ms</i></td>
+        <td>230 <i>ms</i></td>
+        <td>501 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_10000_80000_0:</i></td>
+        <td>324 <i>ms</i></td>
+        <td>480 <i>ms</i></td>
+        <td>5031 <i>ms</i></td>
+        <td>3110 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_20000_160000_0:</i></td>
+        <td>457 <i>ms</i></td>
+        <td>1053 <i>ms</i></td>
+        <td>9061 <i>ms</i></td>
+        <td>11663 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_30000_240000_0:</i></td>
+        <td>498 <i>ms</i></td>
+        <td>1958 <i>ms</i></td>
+        <td>23549 <i>ms</i></td>
+        <td>35028 <i>ms</i></td>
+    </tr>
+</table>
 
-#### NetworkX:
+<table>
+    <tr>
+        <td><strong><i>NetworkX</i></strong></td>
+        <td><i>load_from_json()</i></td>
+        <td><i>shortest_path()</i></td>
+        <td><i>connected_component()</i></td>
+        <td><i>connected_components()</i></td>
+    </tr>
+    <tr>
+        <td><i>G_10_80_0:</i></td>
+        <td>1 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_100_800_0:</i></td>
+        <td>5 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>1 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_1000_8000_0:</i></td>
+        <td>19 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+        <td>2 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_10000_80000_0:</i></td>
+        <td>224 <i>ms</i></td>
+        <td>2 <i>ms</i></td>
+        <td>7 <i>ms</i></td>
+        <td>2 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_20000_160000_0:</i></td>
+        <td>457 <i>ms</i></td>
+        <td>2 <i>ms</i></td>
+        <td>7 <i>ms</i></td>
+        <td>0 <i>ms</i></td>
+    </tr>
+    <tr>
+        <td><i>G_30000_240000_0:</i></td>
+        <td>527 <i>ms</i></td>
+        <td>4 <i>ms</i></td>
+        <td>8 <i>ms</i></td>
+        <td>3 <i>ms</i></td>
+    </tr>
+</table>
