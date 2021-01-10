@@ -81,7 +81,7 @@ class DiGraph(GraphInterface):
 
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
         """
-        connect between two nodes and weight
+        connect between two nodes with weight
         :param id1: the source node
         :param id2: the destination node
         :param weight: the weight of the edge
