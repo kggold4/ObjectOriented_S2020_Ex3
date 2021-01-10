@@ -67,7 +67,8 @@ class GraphAlgo(GraphAlgoInterface):
                 Edges = []
                 for k, v in self.graph.get_all_v().items():
                     if v.position is not None:
-                        Nodes.append({"id": k, "position": v.position})
+                        print(v.position)
+                        Nodes.append({"id": k, "pos": v.position})
                     else:
                         Nodes.append({"id": k})
                     destination = self.graph.all_out_edges_of_node(k)

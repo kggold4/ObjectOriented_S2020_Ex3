@@ -13,13 +13,12 @@ def current_time() -> int:
     return int(round(time.time() * 1000))
 
 
-def read_json_file(filename: str):
-    with open(filename) as f:
-        js_graph = json.load(f)
-    return json_graph.node_link_graph(js_graph, directed=True)
-
-
 def execute(file_name):
+    """
+    execute time test (in millisecond) with GraphAlgo and NetworkX classes by file_name json of a graph
+    :param file_name:
+    :return:
+    """
     graphAlgo = GraphAlgo()
 
     print(file_name)
@@ -41,11 +40,11 @@ def execute(file_name):
     millis_at_end = current_time()
     print('X - load:', millis_at_end - millis_at_start, 'ms')
 
-    # graphAlgo shortest path
-    millis_at_start = current_time()
-    graphAlgo.shortest_path(0, 9)
-    millis_at_end = current_time()
-    print('shortest_path:', millis_at_end - millis_at_start, 'ms')
+    # # graphAlgo shortest path
+    # millis_at_start = current_time()
+    # graphAlgo.shortest_path(0, 9)
+    # millis_at_end = current_time()
+    # print('shortest_path:', millis_at_end - millis_at_start, 'ms')
 
     # networkX shortest path
     millis_at_start = current_time()
@@ -57,10 +56,10 @@ def execute(file_name):
     print('X - shortest_path:', millis_at_end - millis_at_start, 'ms')
 
     # graphAlgo connected component
-    millis_at_start = current_time()
-    graphAlgo.connected_component(0)
-    millis_at_end = current_time()
-    print('connected_component:', millis_at_end - millis_at_start, 'ms')
+    # millis_at_start = current_time()
+    # graphAlgo.connected_component(0)
+    # millis_at_end = current_time()
+    # print('connected_component:', millis_at_end - millis_at_start, 'ms')
 
     # networkX connected component
     millis_at_start = current_time()
@@ -72,10 +71,10 @@ def execute(file_name):
     print('X - connected_component:', millis_at_end - millis_at_start, 'ms')
 
     # graphAlgo connected components
-    millis_at_start = current_time()
-    graphAlgo.connected_components()
-    millis_at_end = current_time()
-    print('connected_components:', millis_at_end - millis_at_start, 'ms')
+    # millis_at_start = current_time()
+    # graphAlgo.connected_components()
+    # millis_at_end = current_time()
+    # print('connected_components:', millis_at_end - millis_at_start, 'ms')
 
     # networkX connected components
     millis_at_start = current_time()

@@ -23,16 +23,21 @@ class GraphCreator:
         random.seed(seed_num)
 
         # make n * 2 points for the node positions
-        pos = []
-        for i in range(n * 2):
-            pos.append(random.random() * 10)
+        x_axis = []
+        y_axis = []
+        z_axis = []
+
+        for i in range(n):
+            x_axis.append(random.random() * 10)
+            y_axis.append(random.random() * 10)
+            z_axis.append(0.0)
 
         # create a new graph
         graph = DiGraph.DiGraph()
 
         # create in the graph n nodes with a tuple (x,y) for a position from pos list
         for i in range(n):
-            p = (pos[i], pos[n - i])
+            p = (x_axis[i], y_axis[i], z_axis[i])
             graph.add_node(i, p)
 
         # connect between nodes randomly
@@ -50,7 +55,7 @@ class GraphCreator:
                         while ni == i:
                             ni = random.randrange(0, n, 1)
 
-                        # connect between  them
+                        # connect between them
                         graph.add_edge(i, ni, graph_nodes[i].distance(graph_nodes[ni]))
                         edge_counter += 1
 
@@ -62,6 +67,6 @@ class GraphCreator:
     @staticmethod
     def get_position() -> tuple:
         """
-        :return: a tuple with randomly (x ,y) coordinates
+        :return: a tuple with randomly (x ,y, z) coordinates
         """
-        return random.random() * 10, random.random() * 10
+        return random.random() * 10, random.random() * 10, 0.0
