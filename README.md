@@ -1,4 +1,8 @@
+<div align="center">
+
 ![calculating](https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/giphy.gif)
+
+</div>
 
 # Object-Oriented Programming Course Assignment #4
 ### Authors: Kfir Goldfarb and Nadav Keysar
