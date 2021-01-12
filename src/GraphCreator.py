@@ -65,8 +65,11 @@ class GraphCreator:
         return graph
 
     @staticmethod
-    def get_position() -> tuple:
+    def get_position(seed_num: int = 0) -> tuple:
         """
         :return: a tuple with randomly (x ,y, z) coordinates
         """
+        # graph seed number
+        random.seed(seed_num)
+
         return random.random() * 10, random.random() * 10, 0.0

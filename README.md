@@ -12,13 +12,13 @@ this project is to implement directed weighted data structure and graph algorith
 
 <br>
 
-## Part 1 - DiGraph class:
+## Part 1 - <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex3/wiki/DiGraph">DiGraph</a> class:
 Build directed weighted graph data structure (DiGraph class) implements the GraphInterface abstract class (as an interface).
 in this Class we implement those methods:
 
 1. ``v_size()`` - return the number of nodes in the graph (|V|)
 2. ``e_size()`` - return the number of edges in the graph (|E|)
-3. ``get_all_v()`` - return a dictionary of graph nodes {(node_id : NodeData)}
+3. ``get_all_v()`` - return a dictionary of graph nodes {(node_id : <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex3/wiki/NodeData">NodeData</a>)}
 4. ``all_in_edges_of_node(node_id)`` - return a dictionary of all the nodes connected to node {(parent_id, weight)}
 5. ``all_in_edges_of_node(node_id)`` - return a dictionary of all the nodes connected from the node {(child_id, weight)}
 6. ``get_mc()`` - return graph mode count
@@ -29,7 +29,7 @@ in this Class we implement those methods:
 
 <br>
 
-## Part 2 - GraphAlgo class:
+## Part 2 - <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex3/wiki/GraphAlgo">GraphAlgo</a> class:
 Build graph algorithms class for the directed and wighted graphs.
 in this Class we implement those methods:
 
@@ -43,7 +43,7 @@ in this Class we implement those methods:
 
 <br>
 
-## Part 3 - Comparisons:
+## Part 3 - <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex3/wiki/Comparisons">Comparisons</a>:
 In this part we compare our algorithms between our Ex2 assignment algorithms that we build in java - see in <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex2.git">Object-Oriented Ex2</a>,
 and with NetworkX library algorithms - see in <a href="https://networkx.org/">networkx.org</a>
 
