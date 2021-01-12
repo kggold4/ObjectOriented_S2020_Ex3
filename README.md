@@ -213,7 +213,7 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
 
 <br>
 
-### <i>Example of ploting the graph using matplotlib:</i>
+### <i>Example of ploting the graph using <a href="https://matplotlib.org/">matplotlib:</a></i>
 <img src="https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/Figure_1.png">
 
 <br>
@@ -223,4 +223,4 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
 git clone https://github.com/kggold4/ObjectOriented_S2020_Ex3.git
 ```
 
-* for more information about the implementation and development process of this project look in our wiki page
+## for more information about the implementation and development process of this project look in our <a href="https://github.com/kggold4/ObjectOriented_S2020_Ex3/wiki">wiki page</a>.
