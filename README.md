@@ -39,7 +39,7 @@ in this Class we implement those methods:
 4. ``shortest_path(node1_id, node2_id)`` - compute the shortest path between to nodes using Dijkstra's algorithm, and return (weight, path)
 5. ``connected_component(node_id)`` - compute strongly connected components for a single node and return the list of the components
 6. ``connected_components()`` - for each node in the graph use connected_component method and compute all graph strongly connected components and return a nested list of all the connected component in the graph 
-7. ``plot_graph()`` - plot the graph wo a window using matplotlib
+7. ``plot_graph()`` - plot the graph to a window using matplotlib
 
 <br>
 
