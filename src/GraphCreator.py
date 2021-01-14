@@ -70,6 +70,6 @@ class GraphCreator:
         :return: a tuple with randomly (x ,y, z) coordinates
         """
         # graph seed number
-        random.seed(seed_num)
+        # random.seed(seed_num)
 
         return random.random() * 10, random.random() * 10, 0.0

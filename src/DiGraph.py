@@ -150,7 +150,6 @@ class DiGraph(GraphInterface):
             node_childes = self.childes[node_id].keys()
             for i in list(node_childes):
                 self.remove_edge(node_id, i)
-                # self.parents[i].pop(node_id)
 
             # remove from childes node_id
             self.childes.pop(node_id)
@@ -166,6 +165,7 @@ class DiGraph(GraphInterface):
             # remove node id from nodes dictionary
             self.nodes.pop(node_id)
             self.mc += 1
+            return True
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
         """

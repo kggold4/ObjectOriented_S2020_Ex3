@@ -1,6 +1,7 @@
 from src.GraphAlgoInterface import GraphAlgoInterface
 from src.GraphInterface import GraphInterface
 from src.DiGraph import DiGraph, NodeData
+import math
 import json
 
 # using bfs from external algo class
@@ -287,15 +288,19 @@ class GraphAlgo(GraphAlgoInterface):
             # getting node position
             position = nodes[i].get_pos()
 
+            if isinstance(position, str):
+                position = position.split(',')
+                position = tuple(position)
+
             # adding the position to positions list
             positions[i] = position
 
             # get x and y of the node position
-            x = position[0]
-            y = position[1]
+            x = float(position[0])
+            y = float(position[1])
 
             # plot the node
-            plt.plot(x, y, marker='o', color='b', markersize=10)
+            plt.plot(x, y, color='b', marker='o', markersize=10)
 
             # each node print near to it the node_id key
             plt.text(x + epsilon, y + epsilon, i, fontsize=10, color='g')
@@ -312,12 +317,35 @@ class GraphAlgo(GraphAlgoInterface):
                 source = positions[i]
                 destination = positions[j]
 
-                # print arrow between source and destination nodes
-                plt.arrow(source[0], source[1], destination[0] - source[0], destination[1] - source[1],
-                          lw=1, length_includes_head=True, head_width=0.3)
+                source_current_x = float(source[0])
+                source_current_y = float(source[1])
+                source_current_z = float(source[2])
 
-                weight_x = (source[0] + destination[0]) / 2 + epsilon
-                weight_y = (source[1] + destination[1]) / 2 + epsilon
+                destination_current_x = float(destination[0])
+                destination_current_y = float(destination[1])
+                destination_current_z = float(destination[2])
+
+                p1 = [source_current_x, source_current_y, source_current_z]
+                p2 = [destination_current_x, destination_current_y, destination_current_z]
+
+                weight = math.dist(p1, p2)
+                head_width = 0.01 * weight * 5
+                width = 0.001
+
+                if weight < 1:
+                    head_width = 0.0005
+                    width = 0.00005
+
+                head_length = head_width
+
+                # print arrow between source and destination nodes
+                plt.arrow(float(source[0]), float(source[1]), float(destination[0]) - float(source[0]),
+                          float(destination[1]) - float(source[1]),
+                          lw=1, length_includes_head=True, head_width=head_width, head_length=head_length,
+                          shape='full', width=width)
+
+                weight_x = (float(source[0]) + float(destination[0])) / 2 + epsilon
+                weight_y = (float(source[1]) + float(destination[1])) / 2 + epsilon
 
                 # near each arrow print the weight of the edge
                 plt.text(weight_x, weight_y, '%.2f' % childes[j], color='r')

@@ -93,4 +93,4 @@ class TestGraphAlgo(TestCase):
     def test_plot_graph(self):
         graph = GraphCreator.create_graph(500, 350, 20)
         graphAlgo = GraphAlgo(graph)
-        # assert graphAlgo.plot_graph() is None
+        assert graphAlgo.plot_graph() is None
