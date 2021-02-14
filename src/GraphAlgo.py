@@ -1,8 +1,8 @@
 from src.GraphAlgoInterface import GraphAlgoInterface
 from src.GraphInterface import GraphInterface
-from src.DiGraph import DiGraph, NodeData
+from src.DiGraph import DiGraph
+from src.NodeData import NodeData
 import math
-import json
 
 # using bfs from external algo class
 from src.ExternalAlgo import ExternalAlgo
