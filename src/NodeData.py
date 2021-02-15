@@ -1,4 +1,4 @@
-from GraphCreator import GraphCreator
+import random
 import math
 
 
@@ -57,7 +57,7 @@ class NodeData:
         if the position of the node is None, create new position from get_position function from GraphCreator class
         """
         if self.position is None:
-            return GraphCreator.get_position()
+            return random.random() * 10, random.random() * 10, 0.0
         else:
             return self.position
 
