@@ -1,7 +1,5 @@
-import json
-import math
-
 from GraphCreator import GraphCreator
+import math
 
 
 class NodeData:

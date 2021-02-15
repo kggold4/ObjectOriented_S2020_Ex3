@@ -7,7 +7,7 @@ class ExternalAlgo:
     this class contains some external algorithms for use in GraphAlgo class on DiGraphs
     """
     @staticmethod
-    def bfs(key: int, direction: bool, graph: DiGraph):
+    def bfs(key: int, direction: bool, graph: DiGraph) -> None:
         """
         BFS algorithm
         :param key: source node
