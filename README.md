@@ -5,7 +5,7 @@
 </div>
 
 # Object-Oriented Programming Course Assignment #4
-### Authors: Kfir Goldfarb and Nadav Keysar
+### Authors: Kfir Goldfarb
 <i>
 this project is to implement directed weighted data structure and graph algorithms using Python Programming language, in this project we have three parts:
 </i>
