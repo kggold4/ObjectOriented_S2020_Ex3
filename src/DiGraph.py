@@ -177,7 +177,7 @@ class DiGraph(GraphInterface):
         node_id1 = int(node_id1)
         node_id2 = int(node_id2)
         # if node_id1 or node_id2 cannot be found in the graph
-        if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys()\
+        if node_id1 not in self.nodes.keys() or node_id2 not in self.nodes.keys() \
                 or len(self.nodes) <= 1 or node_id1 == node_id2:
             return False
         else:

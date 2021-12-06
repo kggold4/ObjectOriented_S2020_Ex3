@@ -1,13 +1,7 @@
-<div align="center">
-
-![calculating](https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/giphy.gif)
-
-</div>
-
-# Object-Oriented Programming Course Assignment #4
-### Authors: Kfir Goldfarb
+# Object-Oriented Programming Course Assignment #3
+### Author: Kfir Goldfarb
 <i>
-this project is to implement directed weighted data structure and graph algorithms using Python Programming language, in this project we have three parts:
+This project is to implement directed weighted data structure and graph algorithms using Python Programming language, in this project we have three parts:
 </i>
 
 <br>
@@ -213,8 +207,8 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
 
 <br>
 
-### <i>Example of ploting the graph using <a href="https://matplotlib.org/">matplotlib:</a></i>
-<img src="https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/Figure_1.png">
+### <i>Example of plotting the graph using <a href="https://matplotlib.org/">matplotlib:</a></i>
+<img alt="plot graph" src="https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/Figure_1.png">
 
 <br>
 

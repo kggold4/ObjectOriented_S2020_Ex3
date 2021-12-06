@@ -6,6 +6,7 @@ class ExternalAlgo:
     """
     this class contains some external algorithms for use in GraphAlgo class on DiGraphs
     """
+
     @staticmethod
     def bfs(key: int, direction: bool, graph: DiGraph) -> None:
         """
@@ -48,7 +49,6 @@ class ExternalAlgo:
 
                 # if have not been visited yet
                 if neighbor_node.tag == -1:
-
                     # append 1 to the tag and add to the simple queue
                     neighbor_node.tag = pop.tag + 1
                     queue.put(neighbor_node)

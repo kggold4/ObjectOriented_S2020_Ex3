@@ -17,30 +17,30 @@ def execute(file_name):
     :param file_name:
     :return:
     """
-    graphAlgo = GraphAlgo()
+    graph_algo = GraphAlgo()
 
     print(file_name)
 
-    # graphAlgo load graph
+    # graph_algo load graph
     millis_at_start = current_time()
-    graphAlgo.load_from_json(file_name)
+    graph_algo.load_from_json(file_name)
     millis_at_end = current_time()
     print('load:', millis_at_end - millis_at_start, 'ms')
 
     # networkX load graph
     millis_at_start = current_time()
     network = nx.DiGraph()
-    network.add_nodes_from(graphAlgo.get_graph().get_all_v().keys())
-    for i in graphAlgo.get_graph().get_all_v().keys():
-        childes = graphAlgo.get_graph().all_out_edges_of_node(i)
+    network.add_nodes_from(graph_algo.get_graph().get_all_v().keys())
+    for i in graph_algo.get_graph().get_all_v().keys():
+        childes = graph_algo.get_graph().all_out_edges_of_node(i)
         for k, v in childes.items():
             network.add_edge(i, k, weight=float(v))
     millis_at_end = current_time()
     print('X - load:', millis_at_end - millis_at_start, 'ms')
 
-    # graphAlgo shortest path
+    # graph_algo shortest path
     millis_at_start = current_time()
-    graphAlgo.shortest_path(0, 9)
+    graph_algo.shortest_path(0, 9)
     millis_at_end = current_time()
     print('shortest_path:', millis_at_end - millis_at_start, 'ms')
 
@@ -53,9 +53,9 @@ def execute(file_name):
     millis_at_end = current_time()
     print('X - shortest_path:', millis_at_end - millis_at_start, 'ms')
 
-    # graphAlgo connected component
+    # graph_algo connected component
     millis_at_start = current_time()
-    graphAlgo.connected_component(0)
+    graph_algo.connected_component(0)
     millis_at_end = current_time()
     print('connected_component:', millis_at_end - millis_at_start, 'ms')
 
@@ -68,9 +68,9 @@ def execute(file_name):
     millis_at_end = current_time()
     print('X - connected_component:', millis_at_end - millis_at_start, 'ms')
 
-    # graphAlgo connected components
+    # graph_algo connected components
     millis_at_start = current_time()
-    graphAlgo.connected_components()
+    graph_algo.connected_components()
     millis_at_end = current_time()
     print('connected_components:', millis_at_end - millis_at_start, 'ms')
 

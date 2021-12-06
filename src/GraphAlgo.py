@@ -64,23 +64,23 @@ class GraphAlgo(GraphAlgoInterface):
         """
         try:
             with open(file_name, 'w') as file:
-                Nodes = []
-                Edges = []
+                nodes = []
+                edges = []
                 for k, v in self.graph.get_all_v().items():
                     if v.position is not None:
                         print(v.position)
-                        Nodes.append({"id": k, "pos": v.position})
+                        nodes.append({"id": k, "pos": v.position})
                     else:
-                        Nodes.append({"id": k})
+                        nodes.append({"id": k})
                     destination = self.graph.all_out_edges_of_node(k)
                     if len(destination) > 0:
                         for d, w in destination.items():
-                            Edges.append({
+                            edges.append({
                                 "src": k,
                                 "w": w,
                                 "dest": d
                             })
-                save = {"Edges": Edges, "Nodes": Nodes}
+                save = {"edges": edges, "nodes": nodes}
                 json.dump(save, default=lambda m: m.__dict__, indent=4, fp=file)
             return True
         except IOError as e:
@@ -104,17 +104,17 @@ class GraphAlgo(GraphAlgoInterface):
                 # get json of the graph from file
                 json_graph = json.load(file)
 
-                Nodes = json_graph.get("Nodes")
+                nodes = json_graph.get("Nodes")
 
-                for n in Nodes:
+                for n in nodes:
                     if len(n) > 1:
                         self.graph.add_node(node_id=n["id"], pos=n["pos"])
                     else:
                         self.graph.add_node(n["id"])
 
-                Edges = json_graph.get("Edges")
+                edges = json_graph.get("Edges")
 
-                for e in Edges:
+                for e in edges:
                     self.graph.add_edge(id1=e["src"], id2=e["dest"], weight=e["w"])
 
             return True
