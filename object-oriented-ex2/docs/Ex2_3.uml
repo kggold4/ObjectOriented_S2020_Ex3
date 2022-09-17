@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>gameClient.Ex2</OriginalElement>
+  <nodes>
+    <node x="216.16113516113518" y="0.0">gameClient.util.Point3D</node>
+    <node x="339.40811688311703" y="100.0">gameClient.CL_Agent</node>
+    <node x="47.47154882154885" y="590.0">gameClient.gui.EndPanel</node>
+    <node x="509.6636123136124" y="590.0">gameClient.gui.StartPanel</node>
+    <node x="321.80646945646953" y="730.0">gameClient.Ex2</node>
+    <node x="179.47154882154885" y="590.0">gameClient.gui.MyFrame</node>
+    <node x="63.42139249639246" y="100.0">gameClient.util.Range2D</node>
+    <node x="121.22154882154885" y="510.0">gameClient.gui.GamePanel</node>
+    <node x="101.07792207792212" y="210.0">gameClient.util.Range2Range</node>
+    <node x="402.12474747474755" y="210.0">gameClient.CL_Pokemon</node>
+    <node x="13.63567821067818" y="0.0">gameClient.util.Range</node>
+    <node x="293.12474747474755" y="390.0">gameClient.Arena</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.util.Range2Range">
+      <point x="-6.0" y="-15.0" />
+      <point x="175.22154882154885" y="450.0" />
+      <point x="119.30488215488216" y="450.0" />
+      <point x="119.30488215488216" y="370.0" />
+      <point x="123.74458874458878" y="370.0" />
+      <point x="-45.33333333333334" y="15.0" />
+    </edge>
+    <edge source="gameClient.Arena" target="gameClient.util.Range2D">
+      <point x="-22.0" y="-15.0" />
+      <point x="315.12474747474755" y="330.0" />
+      <point x="90.57792207792212" y="330.0" />
+      <point x="90.57792207792212" y="180.0" />
+      <point x="115.42139249639246" y="180.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.util.Range2D" target="gameClient.util.Range">
+      <point x="-20.799999999999983" y="-15.0" />
+      <point x="94.62139249639247" y="80.0" />
+      <point x="82.77853535353535" y="80.0" />
+      <point x="25.142857142857167" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.CL_Agent">
+      <point x="18.0" y="-15.0" />
+      <point x="199.22154882154885" y="450.0" />
+      <point x="278.12474747474755" y="450.0" />
+      <point x="278.12474747474755" y="160.0" />
+      <point x="345.63033910533926" y="160.0" />
+      <point x="-49.77777777777777" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.MyFrame" target="gameClient.gui.GamePanel">
+      <point x="-39.0" y="-15.0" />
+      <point x="192.47154882154885" y="570.0" />
+      <point x="151.22154882154885" y="570.0" />
+      <point x="-30.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.Arena" target="gameClient.CL_Pokemon">
+      <point x="28.285714285714278" y="-15.0" />
+      <point x="365.4104617604618" y="350.0" />
+      <point x="411.2676046176047" y="350.0" />
+      <point x="-54.85714285714283" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.CL_Pokemon">
+      <point x="54.0" y="-15.0" />
+      <point x="235.22154882154885" y="490.0" />
+      <point x="476.16361231361236" y="490.0" />
+      <point x="476.16361231361236" y="370.0" />
+      <point x="466.12474747474755" y="370.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.CL_Pokemon" target="gameClient.util.Point3D">
+      <point x="32.0" y="-15.0" />
+      <point x="498.12474747474755" y="190.0" />
+      <point x="487.0747835497837" y="190.0" />
+      <point x="487.0747835497837" y="60.0" />
+      <point x="304.5611351611352" y="60.0" />
+      <point x="36.400000000000034" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.util.Range">
+      <point x="-54.0" y="-15.0" />
+      <point x="127.22154882154885" y="490.0" />
+      <point x="14.0" y="490.0" />
+      <point x="14.0" y="80.0" />
+      <point x="19.921392496392457" y="80.0" />
+      <point x="-37.71428571428572" y="15.0" />
+    </edge>
+    <edge source="gameClient.Arena" target="gameClient.util.Point3D">
+      <point x="-3.142857142857167" y="-15.0" />
+      <point x="333.9818903318904" y="300.0" />
+      <point x="257.97792207792213" y="300.0" />
+      <point x="257.97792207792213" y="70.0" />
+      <point x="262.9611351611352" y="70.0" />
+      <point x="-5.199999999999989" y="15.0" />
+    </edge>
+    <edge source="gameClient.util.Range2D" target="gameClient.util.Point3D">
+      <point x="20.80000000000001" y="-15.0" />
+      <point x="136.22139249639247" y="60.0" />
+      <point x="221.36113516113517" y="60.0" />
+      <point x="-46.80000000000001" y="15.0" />
+    </edge>
+    <edge source="gameClient.CL_Agent" target="gameClient.CL_Pokemon">
+      <point x="49.777777777777786" y="15.0" />
+      <point x="445.1858946608948" y="170.0" />
+      <point x="476.79141414141424" y="170.0" />
+      <point x="10.666666666666686" y="-15.0" />
+    </edge>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.Arena">
+      <point x="42.0" y="-15.0" />
+      <point x="223.22154882154885" y="470.0" />
+      <point x="311.98189033189044" y="470.0" />
+      <point x="-25.14285714285711" y="15.0" />
+    </edge>
+    <edge source="gameClient.Ex2" target="gameClient.Arena">
+      <point x="-9.0" y="-15.0" />
+      <point x="348.80646945646953" y="640.0" />
+      <point x="359.53964646464647" y="640.0" />
+      <point x="359.53964646464647" y="480.0" />
+      <point x="349.69617604617616" y="480.0" />
+      <point x="12.571428571428612" y="15.0" />
+    </edge>
+    <edge source="gameClient.Arena" target="gameClient.util.Range2Range">
+      <point x="-9.428571428571445" y="-15.0" />
+      <point x="327.6961760461761" y="310.0" />
+      <point x="214.41125541125547" y="310.0" />
+      <point x="45.33333333333334" y="15.0" />
+    </edge>
+    <edge source="gameClient.Ex2" target="gameClient.gui.MyFrame">
+      <point x="-15.0" y="-15.0" />
+      <point x="342.80646945646953" y="680.0" />
+      <point x="257.4715488215488" y="680.0" />
+      <point x="26.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.Arena" target="gameClient.util.Range">
+      <point x="-34.571428571428555" y="-15.0" />
+      <point x="302.553318903319" y="350.0" />
+      <point x="42.285714285714334" y="350.0" />
+      <point x="42.285714285714334" y="80.0" />
+      <point x="57.63567821067818" y="80.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.CL_Agent" target="gameClient.util.Point3D">
+      <point x="-28.0" y="-15.0" />
+      <point x="367.40811688311703" y="80.0" />
+      <point x="283.7611351611352" y="80.0" />
+      <point x="15.600000000000023" y="15.0" />
+    </edge>
+    <edge source="gameClient.Ex2" target="gameClient.gui.EndPanel">
+      <point x="-27.0" y="-15.0" />
+      <point x="330.80646945646953" y="700.0" />
+      <point x="131.47154882154885" y="700.0" />
+      <point x="28.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.Ex2" target="gameClient.gui.StartPanel">
+      <point x="33.0" y="-15.0" />
+      <point x="390.80646945646953" y="710.0" />
+      <point x="573.6636123136125" y="710.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.CL_Pokemon" target="gameClient.CL_Agent">
+      <point x="-53.333333333333314" y="-15.0" />
+      <point x="412.79141414141424" y="190.0" />
+      <point x="407.8525613275615" y="190.0" />
+      <point x="12.444444444444457" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.util.Point3D">
+      <point x="6.0" y="-15.0" />
+      <point x="187.22154882154885" y="440.0" />
+      <point x="247.57792207792212" y="440.0" />
+      <point x="247.57792207792212" y="80.0" />
+      <point x="252.5611351611352" y="80.0" />
+      <point x="-15.599999999999994" y="15.0" />
+    </edge>
+    <edge source="gameClient.Ex2" target="gameClient.CL_Agent">
+      <point x="9.0" y="-15.0" />
+      <point x="366.80646945646953" y="670.0" />
+      <point x="391.62474747474755" y="670.0" />
+      <point x="391.62474747474755" y="190.0" />
+      <point x="395.40811688311703" y="190.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.Arena" target="gameClient.CL_Agent">
+      <point x="9.428571428571445" y="-15.0" />
+      <point x="346.553318903319" y="280.0" />
+      <point x="343.392243867244" y="280.0" />
+      <point x="343.392243867244" y="170.0" />
+      <point x="358.0747835497837" y="170.0" />
+      <point x="-37.333333333333314" y="15.0" />
+    </edge>
+    <edge source="gameClient.util.Range2Range" target="gameClient.util.Point3D">
+      <point x="51.0" y="-15.0" />
+      <point x="220.07792207792212" y="190.0" />
+      <point x="214.52795815295826" y="190.0" />
+      <point x="214.52795815295826" y="80.0" />
+      <point x="242.16113516113518" y="80.0" />
+      <point x="-26.0" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.MyFrame" target="gameClient.Arena">
+      <point x="13.0" y="-15.0" />
+      <point x="244.47154882154885" y="560.0" />
+      <point x="305.8208152958154" y="560.0" />
+      <point x="305.8208152958154" y="480.0" />
+      <point x="324.553318903319" y="480.0" />
+      <point x="-12.571428571428555" y="15.0" />
+    </edge>
+    <edge source="gameClient.Ex2" target="gameClient.CL_Pokemon">
+      <point x="21.0" y="-15.0" />
+      <point x="378.80646945646953" y="690.0" />
+      <point x="493.16361231361236" y="690.0" />
+      <point x="493.16361231361236" y="360.0" />
+      <point x="502.69617604617616" y="360.0" />
+      <point x="36.57142857142861" y="15.0" />
+    </edge>
+    <edge source="gameClient.gui.GamePanel" target="gameClient.util.Range2D">
+      <point x="-30.0" y="-15.0" />
+      <point x="151.22154882154885" y="470.0" />
+      <point x="57.72542087542092" y="470.0" />
+      <point x="57.72542087542092" y="150.0" />
+      <point x="70.8499639249639" y="150.0" />
+      <point x="-44.571428571428555" y="15.0" />
+    </edge>
+    <edge source="gameClient.util.Range2Range" target="gameClient.util.Range2D">
+      <point x="-51.0" y="-15.0" />
+      <point x="118.07792207792212" y="190.0" />
+      <point x="130.27853535353532" y="190.0" />
+      <point x="14.857142857142861" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6453333333333333" x="301.0" y="365.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+

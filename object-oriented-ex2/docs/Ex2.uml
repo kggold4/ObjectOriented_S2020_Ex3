@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>gameClient.Ex2</OriginalElement>
+  <nodes>
+    <node x="276.6477272727275" y="300.0">api.DWGraph_DS</node>
+    <node x="102.15815508021393" y="200.0">api.NodeData</node>
+    <node x="0.0" y="80.0">api.GEOLocation</node>
+    <node x="257.15815508021393" y="200.0">api.EdgeData</node>
+    <node x="231.23106060606082" y="80.0">api.node_data</node>
+    <node x="504.7754901960784" y="200.0">api.directed_weighted_graph</node>
+    <node x="821.6477272727275" y="200.0">api.edge_location</node>
+    <node x="753.95" y="80.0">api.edge_data</node>
+    <node x="297.5254901960784" y="410.0">api.DWGraph_Algo</node>
+    <node x="74.5" y="0.0">api.geo_location</node>
+    <node x="893.327762923351" y="300.0">api.EdgeLocation</node>
+    <node x="424.6477272727275" y="300.0">api.dw_graph_algorithms</node>
+    <node x="656.6477272727275" y="300.0">api.game_service</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="api.DWGraph_Algo" target="api.node_data">
+      <point x="-26.181818181818187" y="-15.0" />
+      <point x="343.3436720142603" y="360.0" />
+      <point x="224.65815508021393" y="360.0" />
+      <point x="224.65815508021393" y="150.0" />
+      <point x="264.5643939393941" y="150.0" />
+      <point x="-26.666666666666686" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_Algo" target="api.edge_data">
+      <point x="52.363636363636374" y="-15.0" />
+      <point x="421.8891265597148" y="380.0" />
+      <point x="811.1477272727275" y="380.0" />
+      <point x="811.1477272727275" y="180.0" />
+      <point x="813.95" y="180.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_Algo" target="api.directed_weighted_graph">
+      <point x="26.181818181818187" y="-15.0" />
+      <point x="395.70730837789665" y="360.0" />
+      <point x="635.1477272727275" y="360.0" />
+      <point x="635.1477272727275" y="280.0" />
+      <point x="640.1088235294118" y="280.0" />
+      <point x="19.33333333333337" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_DS" target="api.node_data">
+      <point x="-24.0" y="-15.0" />
+      <point x="316.6477272727275" y="260.0" />
+      <point x="246.65815508021393" y="260.0" />
+      <point x="246.65815508021393" y="170.0" />
+      <point x="291.23106060606085" y="170.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_Algo" target="api.dw_graph_algorithms">
+      <point x="13.090909090909122" y="-15.0" />
+      <point x="382.61639928698753" y="350.0" />
+      <point x="524.6477272727275" y="350.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="api.edge_location" target="api.edge_data">
+      <point x="0.0" y="-15.0" />
+      <point x="897.6477272727275" y="180.0" />
+      <point x="827.2833333333333" y="180.0" />
+      <point x="13.333333333333371" y="15.0" />
+    </edge>
+    <edge source="api.node_data" target="api.geo_location">
+      <point x="0.0" y="-15.0" />
+      <point x="291.23106060606085" y="55.0" />
+      <point x="204.10000000000002" y="55.0" />
+      <point x="57.599999999999994" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_Algo" target="api.GEOLocation">
+      <point x="-65.45454545454544" y="-15.0" />
+      <point x="304.070944741533" y="390.0" />
+      <point x="34.0" y="390.0" />
+      <point x="-34.0" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_DS" target="api.edge_data">
+      <point x="8.0" y="-15.0" />
+      <point x="348.6477272727275" y="250.0" />
+      <point x="379.6581550802139" y="250.0" />
+      <point x="379.6581550802139" y="160.0" />
+      <point x="773.95" y="160.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="api.NodeData" target="api.GEOLocation">
+      <point x="-44.80000000000001" y="-15.0" />
+      <point x="113.35815508021392" y="180.0" />
+      <point x="102.0" y="180.0" />
+      <point x="34.0" y="15.0" />
+    </edge>
+    <edge source="api.EdgeData" target="api.edge_data">
+      <point x="37.333333333333314" y="-15.0" />
+      <point x="350.49148841354724" y="150.0" />
+      <point x="760.6166666666666" y="150.0" />
+      <point x="-53.33333333333337" y="15.0" />
+    </edge>
+    <edge source="api.NodeData" target="api.node_data">
+      <point x="44.80000000000001" y="-15.0" />
+      <point x="202.95815508021394" y="140.0" />
+      <point x="251.23106060606082" y="140.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="api.EdgeData" target="api.node_data">
+      <point x="-37.33333333333337" y="-15.0" />
+      <point x="275.82482174688056" y="180.0" />
+      <point x="304.5643939393941" y="180.0" />
+      <point x="13.333333333333314" y="15.0" />
+    </edge>
+    <edge source="api.game_service" target="api.directed_weighted_graph">
+      <point x="0.0" y="-15.0" />
+      <point x="728.6477272727275" y="280.0" />
+      <point x="717.442156862745" y="280.0" />
+      <point x="96.66666666666663" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_Algo" target="api.NodeData">
+      <point x="-52.363636363636374" y="-15.0" />
+      <point x="317.16185383244203" y="380.0" />
+      <point x="112.82776292335097" y="380.0" />
+      <point x="112.82776292335097" y="280.0" />
+      <point x="120.82482174688062" y="280.0" />
+      <point x="-37.333333333333314" y="15.0" />
+    </edge>
+    <edge source="api.directed_weighted_graph" target="api.node_data">
+      <point x="-58.0" y="-15.0" />
+      <point x="562.7754901960784" y="130.0" />
+      <point x="344.5643939393942" y="130.0" />
+      <point x="53.33333333333337" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_DS" target="api.directed_weighted_graph">
+      <point x="56.0" y="-15.0" />
+      <point x="396.6477272727275" y="280.0" />
+      <point x="562.7754901960784" y="280.0" />
+      <point x="-58.0" y="15.0" />
+    </edge>
+    <edge source="api.GEOLocation" target="api.geo_location">
+      <point x="34.0" y="-15.0" />
+      <point x="102.0" y="55.0" />
+      <point x="117.69999999999999" y="55.0" />
+      <point x="-28.80000000000001" y="15.0" />
+    </edge>
+    <edge source="api.dw_graph_algorithms" target="api.node_data">
+      <point x="-50.0" y="-15.0" />
+      <point x="474.6477272727275" y="250.0" />
+      <point x="465.5673351158646" y="250.0" />
+      <point x="465.5673351158646" y="140.0" />
+      <point x="331.23106060606085" y="140.0" />
+      <point x="40.00000000000006" y="15.0" />
+    </edge>
+    <edge source="api.EdgeLocation" target="api.edge_location">
+      <point x="-48.0" y="-15.0" />
+      <point x="917.327762923351" y="280.0" />
+      <point x="897.6477272727275" y="280.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_DS" target="api.EdgeData">
+      <point x="-8.0" y="-15.0" />
+      <point x="332.6477272727275" y="250.0" />
+      <point x="313.15815508021393" y="250.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="api.EdgeLocation" target="api.edge_data">
+      <point x="48.0" y="-15.0" />
+      <point x="1013.327762923351" y="280.0" />
+      <point x="1003.9081550802139" y="280.0" />
+      <point x="1003.9081550802139" y="160.0" />
+      <point x="853.95" y="160.0" />
+      <point x="40.0" y="15.0" />
+    </edge>
+    <edge source="api.dw_graph_algorithms" target="api.directed_weighted_graph">
+      <point x="50.0" y="-15.0" />
+      <point x="574.6477272727275" y="280.0" />
+      <point x="601.442156862745" y="280.0" />
+      <point x="-19.33333333333337" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_Algo" target="api.DWGraph_DS">
+      <point x="-13.090909090909065" y="-15.0" />
+      <point x="356.4345811051694" y="350.0" />
+      <point x="308.6477272727275" y="350.0" />
+      <point x="-32.0" y="15.0" />
+    </edge>
+    <edge source="api.DWGraph_DS" target="api.NodeData">
+      <point x="-56.0" y="-15.0" />
+      <point x="284.6477272727275" y="280.0" />
+      <point x="195.49148841354724" y="280.0" />
+      <point x="37.33333333333334" y="15.0" />
+    </edge>
+    <edge source="api.NodeData" target="api.geo_location">
+      <point x="-22.400000000000034" y="-15.0" />
+      <point x="135.7581550802139" y="180.0" />
+      <point x="146.5" y="180.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="api.directed_weighted_graph" target="api.edge_data">
+      <point x="58.0" y="-15.0" />
+      <point x="678.7754901960784" y="180.0" />
+      <point x="800.6166666666666" y="180.0" />
+      <point x="-13.333333333333371" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4461794019933555" x="849.921816827997" y="522.3827252419956" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
