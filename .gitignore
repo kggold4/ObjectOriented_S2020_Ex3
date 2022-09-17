@@ -1,4 +1,9 @@
-.idea/*
-venv/*
-src/__pycache__/*
-tests/__init__.py
+object-oriented-ex3/.idea/*
+object-oriented-ex3/venv/*
+object-oriented-ex3/src/__pycache__/*
+object-oriented-ex3/tests/__init__.py
+object-oriented-ex2/.idea/*
+object-oriented-ex2/Ex2.iml
+object-oriented-ex2/out/*
+object-oriented-ex2/obj.json
+object-oriented-ex2/wiki.txt
