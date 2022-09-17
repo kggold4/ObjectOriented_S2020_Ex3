@@ -208,7 +208,7 @@ and with NetworkX library algorithms - see in <a href="https://networkx.org/">ne
 <br>
 
 ### <i>Example of plotting the graph using <a href="https://matplotlib.org/">matplotlib:</a></i>
-<img alt="plot graph" src="https://github.com/kggold4/ObjectOriented_S2020_Ex3/blob/main/images/Figure_1.png">
+<img alt="plot graph" src="https://github.com/kggold4/object-oriented-assignments/blob/main/object-oriented-ex3/images/Figure_1.png">
 
 <br>
 
